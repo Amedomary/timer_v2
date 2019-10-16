@@ -12,12 +12,12 @@
 
 <script>
 // @ is an alias to /src
-import Grid from "@/components/Grid.vue";
+import Grid from '@/components/Grid.vue';
 
 export default {
-  name: "home",
+  name: 'home',
   components: {
-    Grid
-  }
+    Grid,
+  },
 };
 </script>
