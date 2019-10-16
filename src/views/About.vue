@@ -21,6 +21,8 @@ export default {
   },
 
   data() {
+    console.log(this.$store.state);
+
     return {
       imageSrcBackground: bg,
     };

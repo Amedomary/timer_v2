@@ -20,6 +20,20 @@
 <script>
 export default {
   name: 'Header',
+
+  data() {
+    return {
+      createTimerShow: false,
+      weHaveModificateTimer: false,
+      stateWasModified: false,
+    };
+  },
+
+  methods: {
+    createTimer() {
+      this.createTimerShow = !this.createTimerShow;
+    },
+  },
 };
 </script>
 
