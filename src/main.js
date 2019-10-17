@@ -5,6 +5,14 @@ import router from './router';
 import store from './store';
 import 'normalize.css';
 
+Vue.config.productionTip = false;
+
+new Vue({
+  router,
+  store,
+  render: h => h(App),
+}).$mount('#app');
+
 // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: 'AIzaSyAPq6A0sDX_unr33Qy8aqrAbvo2ErIRHDs',
@@ -21,20 +29,10 @@ firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
 
 // Получаем данные
-const infos = database.ref('pages').once('value')
+database.ref('pages').once('value')
   .then((e) => {
-    store.state.data = e.val();
-    console.log(e.val());
+    store.commit('newData', e.val());
   })
   .catch((error) => {
     console.log(error);
   });
-
-Vue.config.productionTip = false;
-
-
-new Vue({
-  router,
-  store,
-  render: h => h(App),
-}).$mount('#app');

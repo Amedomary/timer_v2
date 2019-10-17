@@ -25,6 +25,9 @@ export default {
 
     return {
       imageSrcBackground: bg,
+      styleApp: '',
+      vueAppClass: '',
+      vueBackClass: '',
     };
   },
 };

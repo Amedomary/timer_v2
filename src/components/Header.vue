@@ -2,7 +2,7 @@
 .header
     a.link-create(@click="createTimer" href='javascript:void(0)', title='')
         span(v-if='createTimerShow')
-            span Отмена
+            span Отмена {{ $store.state.name }}
         span(v-else-if='weHaveModificateTimer')
             span Редактировать
         span(v-else)
@@ -32,6 +32,7 @@ export default {
   methods: {
     createTimer() {
       this.createTimerShow = !this.createTimerShow;
+      console.log(this.$store.getters.getName);
     },
   },
 };
