@@ -6,7 +6,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     data: null,
-    name: 'max',
+    app: 'new', // new, edit, midified
   },
   mutations: {
     newData(state, data) {

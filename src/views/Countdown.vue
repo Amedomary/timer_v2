@@ -4,7 +4,6 @@
         Grid
         Header
 
-
 </template>
 
 <script>

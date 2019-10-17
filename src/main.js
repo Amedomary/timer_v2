@@ -32,6 +32,7 @@ const database = firebase.database();
 database.ref('pages').once('value')
   .then((e) => {
     store.commit('newData', e.val());
+    console.log(store.state);
   })
   .catch((error) => {
     console.log(error);
