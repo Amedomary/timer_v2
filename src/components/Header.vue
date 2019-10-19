@@ -32,7 +32,6 @@ export default {
   methods: {
     createTimer() {
       this.createTimerShow = !this.createTimerShow;
-      console.log(this.$store.getters.getName);
     },
   },
 };

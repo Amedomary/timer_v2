@@ -59,22 +59,13 @@ export default {
       this.page_2 = sortList[1];
       this.page_3 = sortList[0];
       this.isLoading = false;
-
-      console.log(sortList);
     },
   },
 
   mounted() {
-    // Получаем данные
-    this.db.ref('pages').once('value')
-      .then((e) => {
-        const json = e.val();
-        this.$store.commit('newData', json);
-        this.sortData(json);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    this.$store.subscribe((mutation, state) => {
+      this.sortData(state.fireDB);
+    });
   },
 };
 </script>

@@ -22,8 +22,6 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
 
-console.log(database, 1);
-
 new Vue({
   router,
   store,
@@ -31,15 +29,14 @@ new Vue({
   data: {
     database,
   },
-  // mounted() {
-  //   // Получаем данные
-  //   database.ref('pages').once('value')
-  //     .then((e) => {
-  //       store.commit('newData', e.val());
-  //       console.log(store.state);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // },
+  mounted() {
+    // Получаем данные
+    database.ref('pages').once('value')
+      .then((e) => {
+        store.commit('newData', e.val());
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  },
 }).$mount('#app');
