@@ -3,7 +3,7 @@
 mixin contentImage(heading)
     .wrapper
         h1= heading
-        a(htef="#") Подробнее
+        Button
 
 section.banner(v-if="$store.state.data", :class="bannerClass")
     .image.image--1(@mouseenter="activateImg('1')" @mouseleave="activateImg('')" :style="{ backgroundImage: 'url('+$store.state.data[0].imageSrcBackground+')'}")
@@ -16,8 +16,13 @@ section.banner(v-if="$store.state.data", :class="bannerClass")
 </template>
 
 <script>
+import Button from '@/components/Button.vue';
+
 export default {
   name: 'Baner',
+  components: {
+    Button,
+  },
   data() {
     return {
       bannerClass: '',
@@ -92,8 +97,8 @@ export default {
 }
 
 .wrapper {
+    position: absolute;
     bottom: 128px;
     left: 256px;
-    position: absolute;
 }
 </style>
