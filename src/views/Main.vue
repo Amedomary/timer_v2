@@ -2,8 +2,7 @@
 .page
     HeaderBar
 
-    section.banner(v-if="$store.state.data")
-        img.banner__image(:src="$store.state.data[0].imageSrcBackground")
+    Baner
 
     ul
         li(v-for="({ heading, imageSrcBackground }, value ) in $store.state.data")
@@ -15,11 +14,13 @@
 <script>
 // @ is an alias to /src
 import HeaderBar from '@/components/HeaderBar.vue';
+import Baner from '@/components/Baner.vue';
 
 export default {
   name: 'Main',
   components: {
     HeaderBar,
+    Baner,
   },
   data() {
     return {};
@@ -28,13 +29,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.banner {
-    height: 600px;
-
-    &__image {
-        height: 100%;
-        object-fit: cover;
-        width: 100%;
-    }
-}
 </style>

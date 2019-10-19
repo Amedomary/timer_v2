@@ -16,6 +16,7 @@ export default {};
   right: 200px;
   padding: 15px;
   background-color: #00000066;
+  z-index: 30;
 
   &::before,
   &::after {
@@ -29,12 +30,12 @@ export default {};
 
   &:after {
       left: 100%;
-      background-image: linear-gradient(-75deg, #ffffff00 50%, #00000066 50%);
+      background-image: linear-gradient(-54deg, #ffffff00 50%, #00000066 50%);
   }
 
   &:before {
       right: 100%;
-      background-image: linear-gradient(-255deg, #ffffff00 50%, #00000066 50%);
+      background-image: linear-gradient(-234deg, #ffffff00 50%, #00000066 50%);
   }
 }
 </style>
