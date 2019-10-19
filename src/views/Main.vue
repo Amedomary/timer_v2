@@ -6,13 +6,11 @@
 
     ul
         li(v-for="({ heading, imageSrcBackground }, value ) in $store.state.data")
-            //- img(:src="imageSrcBackground")
             | {{ heading }} : {{ value }}
 
 </template>
 
 <script>
-// @ is an alias to /src
 import HeaderBar from '@/components/HeaderBar.vue';
 import Baner from '@/components/Baner.vue';
 

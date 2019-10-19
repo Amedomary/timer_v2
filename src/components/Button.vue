@@ -1,11 +1,12 @@
 <template lang="pug">
-  a.button( href="javascript:void(0);" title='' ) Подробнее кнопка
+  a.button( :href="href" :title='title' ) {{text}}
 
 </template>
 
 <script>
 export default {
   name: 'Button',
+  props: ['text', 'href', 'title'],
 };
 </script>
 
@@ -22,17 +23,18 @@ export default {
     transition: .2s;
     text-align: center;
     text-decoration: none;
-    color: #ffffff !important;
+    border-style: solid;
     border-width: 1px;
     border-color: var(--accent);
     border-radius: 0;
     background: none;
-    background-color: var(--accent-back);
+    background-color: #00000020;
 
     &:hover {
         font-size: 15px;
         border-color: var(--accent);
-        background-color: var(--accent-hover);
+        background-color: #000000dd;
+        color: var(--link-hover);
     }
 
     &:focus {

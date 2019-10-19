@@ -7,12 +7,6 @@ import 'normalize.css';
 
 Vue.config.productionTip = false;
 
-new Vue({
-  router,
-  store,
-  render: h => h(App),
-}).$mount('#app');
-
 // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: 'AIzaSyAPq6A0sDX_unr33Qy8aqrAbvo2ErIRHDs',
@@ -28,12 +22,24 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
 
-// Получаем данные
-database.ref('pages').once('value')
-  .then((e) => {
-    store.commit('newData', e.val());
-    console.log(store.state);
-  })
-  .catch((error) => {
-    console.log(error);
-  });
+console.log(database, 1);
+
+new Vue({
+  router,
+  store,
+  render: h => h(App),
+  data: {
+    database,
+  },
+  // mounted() {
+  //   // Получаем данные
+  //   database.ref('pages').once('value')
+  //     .then((e) => {
+  //       store.commit('newData', e.val());
+  //       console.log(store.state);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // },
+}).$mount('#app');

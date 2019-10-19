@@ -13,6 +13,8 @@ export default {};
 </script>
 
 <style lang="scss" scoped>
+@import "./../assets/variables.scss";
+
 .header {
   position: absolute;
   top: 30px;
@@ -48,6 +50,8 @@ export default {};
 .logo {
   font-size: 1.5rem;
   margin-right: auto;
+  font-family: $font-rubik;
+  font-weight: 100;
 }
 
 .nav {}
