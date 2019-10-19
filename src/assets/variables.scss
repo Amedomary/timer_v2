@@ -20,16 +20,6 @@ $mobile: (
   max-width: 767px
 );
 
-:root {
-  --cl-font-main: #fff5e4;
-  // --theme-color: ;
-  --accent: ~"hsl(var(--theme-color), 60%, 40%)";
-  --accent-light: ~"hsl(var(--theme-color), 71%, 57%)";
-  --accent-back: ~"hsla(var(--theme-color), 53%, 29%, .2)";
-  --accent-hover: ~"hsla(var(--theme-color), 53%, 29%, .4)";
-  --accent-dark: ~"hsl(var(--theme-color), 80%, 6%)";
-}
-
 // Добавлять cl-название
 // Цвета текста
 $cl-font-white: #fff;
