@@ -5,12 +5,12 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    data: null,
+    fireDB: null,
     app: 'new', // new, edit, midified
   },
   mutations: {
     newData(state, data) {
-      state.data = data;
+      state.fireDB = data;
     },
   },
   actions: {
@@ -18,6 +18,6 @@ export default new Vuex.Store({
   },
   // вычисления из стейта
   getters: {
-    getName: state => state.name,
+    // getName: state => state.name,
   },
 });

@@ -5,7 +5,7 @@
     Baner
 
     ul
-        li(v-for="({ heading, imageSrcBackground }, value ) in $store.state.data")
+        li(v-for="({ heading, imageSrcBackground }, value ) in $store.state.fireDB")
             | {{ heading }} : {{ value }}
 
 </template>
