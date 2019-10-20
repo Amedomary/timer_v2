@@ -34,6 +34,7 @@ new Vue({
     database.ref('pages').once('value')
       .then((e) => {
         store.commit('newData', e.val());
+        console.log(e.val()[0]);
       })
       .catch((error) => {
         console.error(error);
