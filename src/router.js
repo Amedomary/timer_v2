@@ -8,11 +8,11 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Main',
+      name: 'main',
       component: Main,
     },
     {
-      path: '/Countdown',
+      path: '/countdown/:id',
       name: 'Countdown',
       // route level code-splitting
       // this generates a separate chunk (Countdown.[hash].js) for this route

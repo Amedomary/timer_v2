@@ -3,6 +3,11 @@
         img.landing__background(src='', alt='', title='', :class='vueBackClass', v-bind:src="imageSrcBackground")
         Grid
         Header
+        SvgCircle
+        Clock
+        Description
+
+        //- h2 id - {{ $route.params.id }}
 
 </template>
 
@@ -10,6 +15,9 @@
 // @ is an alias to /src
 import Grid from '@/components/Grid.vue';
 import Header from '@/components/Header.vue';
+import SvgCircle from '@/components/SvgCircle.vue';
+import Clock from '@/components/Clock.vue';
+import Description from '@/components/Description.vue';
 import bg from '@/assets/botanik.jpg';
 
 export default {
@@ -17,6 +25,9 @@ export default {
   components: {
     Grid,
     Header,
+    SvgCircle,
+    Clock,
+    Description,
   },
 
   data() {
@@ -27,11 +38,31 @@ export default {
       vueBackClass: '',
     };
   },
+
+  beforeRouteUpdate(to, from, next) {
+    // обрабатываем изменение параметров маршрута...
+    console.log(to, from, next);
+    // не забываем вызвать next()
+    next();
+  },
 };
 </script>
 
 <style lang="scss">
 @import "../assets/variables.scss";
+
+html, body, #app {
+  height: 100%;
+}
+
+:root {
+  --theme-color: 53;
+  --accent: hsl(var(--theme-color),60%,40%);
+  --accent-light: hsl(var(--theme-color),71%,57%);
+  --accent-back: hsla(var(--theme-color),53%,29%,.2);
+  --accent-hover: hsla(var(--theme-color),53%,29%,.4);
+  --accent-dark: hsl(var(--theme-color),80%,6%);
+}
 
 .landing {
   width: 100%;
@@ -169,341 +200,9 @@ export default {
     transition: filter 0.5s;
   }
 
-  &__description {
-    position: absolute;
-    left: 60%;
-    right: 40px;
-    // top: 52%;
-    bottom: 20%;
-  }
-  &__pre-heading {
-    font-size: 11px;
-    // font-family: @font-sans;
-    text-transform: uppercase;
-    margin: 0 0 15px 0;
-
-    background: none;
-    border: none;
-    padding: 0 0 0 3px;
-    outline: none;
-
-    // .icon-edit-hover(-22px);
-  }
-  &__heading {
-    font-size: 47px;
-    // font-family: @font-base;
-    margin: 0 0 15px 0;
-
-    background: none;
-    border: none;
-    padding: 0;
-    outline: none;
-
-    // .icon-edit-hover(-7px);
-  }
-  &__description-text {
-    width: 340px;
-    margin: 0;
-    font-size: 12px;
-    line-height: 1.5;
-    margin-bottom: 70px;
-    min-height: 12px;
-    background: none;
-    border: none;
-    padding: 0 0 0 3px;
-    outline: none;
-
-    // .icon-edit-hover(-27px)
-  }
-  &__description-input-wrapper {
-    position: relative;
-  }
-  &__accept-edit-description {
-    cursor: pointer;
-    display: block;
-    position: absolute;
-    top: 0;
-    left: -50px;
-    width: 36px;
-    height: 36px;
-    background-color: var(--accent-dark);
-    border: 1px solid var(--accent);
-
-    &:after,
-    &:before {
-      content: "";
-      position: absolute;
-      top: 16px;
-      left: 6px;
-      display: block;
-      width: 24px;
-      height: 2px;
-      background-color: var(--accent);
-      transform: rotate(-45deg);
-      transform-origin: center;
-    }
-    &:before {
-      transform: rotate(45deg);
-    }
-
-    &--pre-heading {
-      top: -10px;
-    }
-    &--heading {
-      top: 6px;
-    }
-    &--description {
-      top: -10px;
-    }
-
-    &.accept {
-      &:before {
-        width: 11px;
-        top: 19px;
-        left: 6px;
-      }
-      &:after {
-        left: 12px;
-        width: 19px;
-      }
-    }
-  }
-
-  &__button-wrapper {
-    position: relative;
-    // .icon-edit-hover(-51px);
-  }
-
   &__hide-icon {
     display: none;
   }
-
-  &__circle {
-    position: absolute;
-    top: 50%;
-    left: 40%;
-    width: 37%;
-    height: auto;
-    transform: translate(-50%, -50%);
-    overflow: visible;
-
-    &.fade {
-      opacity: 0.5;
-
-      .st0,
-      .st1,
-      .st2,
-      .st3,
-      .st4,
-      .st5 {
-        animation-play-state: paused;
-      }
-    }
-
-    .st0,
-    .st1 {
-      fill: none;
-      // stroke: #fff;
-      stroke: var(--accent-light);
-      stroke-width: 1px;
-      stroke-dasharray: 5, 20;
-      transform-origin: center;
-      animation-name: rotate-1;
-      animation-duration: 60s;
-      animation-direction: normal;
-      animation-iteration-count: infinite;
-      animation-timing-function: linear;
-    }
-    .st1 {
-      stroke: var(--accent-light);
-      stroke-width: 2px;
-      stroke-miterlimit: 10;
-      stroke-dasharray: 2, 8;
-      animation-duration: 120s;
-    }
-    .st2,
-    .st3,
-    .st4,
-    .st5 {
-      fill: none;
-      stroke: var(--accent-light);
-      stroke-width: 1px;
-      transform-origin: center;
-      animation-name: rotate-2;
-      animation-duration: 120s;
-      animation-direction: normal;
-      animation-iteration-count: infinite;
-      animation-timing-function: linear;
-    }
-    .st3 {
-      animation-duration: 140s;
-      animation-name: rotate-3;
-    }
-    .st4 {
-      animation-duration: 160s;
-      animation-name: rotate-4;
-    }
-    .st5 {
-      animation-duration: 180s;
-      animation-name: rotate-5;
-    }
-  }
-
-  // Часы ====================
-  &__clock {
-    position: absolute;
-    bottom: 50%;
-    left: 20%;
-    font-weight: 100;
-    padding-bottom: 10px;
-    // =Nova+Mono|Roboto+Mono|VT323&display=swap
-
-    &:after {
-      content: "";
-      position: absolute;
-      bottom: -1px;
-      left: 25px;
-      right: 3px;
-      height: 1px;
-      background-color: #fff;
-    }
-
-    &.editable {
-      cursor: pointer;
-
-      .b-icon--clock-edit {
-        display: block;
-        opacity: 0.2;
-        transition: opacity 0.2s;
-      }
-
-      &:after {
-        transition: 0.2s;
-      }
-
-      .no-touchevents &:hover,
-      .touchevents &:active {
-        .b-icon--clock-edit {
-          opacity: 0.8;
-        }
-
-        &:after {
-          background-color: var(--accent);
-          left: 15px;
-          right: -7px;
-          height: 2px;
-        }
-      }
-    }
-  }
-  &__month {
-    display: block;
-    font-size: 25px;
-    margin-bottom: 12px;
-    opacity: 0.6;
-    padding-left: 10px;
-  }
-  &__day {
-    position: relative;
-    display: inline-block;
-    font-size: 90px;
-    vertical-align: middle;
-    margin-right: 25px;
-    font-family: "Nova Mono";
-
-    .title {
-      position: absolute;
-      bottom: -2px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 15px;
-      // font-family: @font-base;
-    }
-  }
-  &__hour {
-    display: inline-block;
-    font-size: 70px;
-    vertical-align: middle;
-    margin-right: 5px;
-    font-family: "Nova Mono";
-  }
-  &__slash {
-    display: inline-block;
-    font-size: 38px;
-    vertical-align: middle;
-    margin-right: 5px;
-    opacity: 0.2;
-  }
-  &__minutes {
-    display: inline-block;
-    font-size: 40px;
-    vertical-align: middle;
-    opacity: 0.75;
-    margin-right: 5px;
-    font-family: "Nova Mono";
-  }
-  &__clock-form-back {
-    cursor: default;
-    position: absolute;
-    z-index: 560;
-    top: 59px;
-    left: 41px;
-    width: 350px;
-    background-color: var(--accent-back);
-    padding: 12px;
-
-    &--btn {
-      left: -14px;
-      top: auto;
-      bottom: -14px;
-    }
-  }
-  &__clock-form {
-    padding: 24px;
-    background-color: var(--accent-dark);
-  }
-  &__clock-input {
-    // font-family: @font-sans;
-    font-size: 25px;
-    border: none;
-    border-bottom: 1px solid var(--accent);
-    padding: 0 4px 4px 4px;
-    margin: 0;
-    background-color: transparent;
-  }
-  &__clock-form-link-wrap {
-    text-align: right;
-    margin-top: 35px;
-  }
-  &__clock-form-link {
-    margin-left: 15px;
-    // font-family: @font-sans;
-    text-transform: uppercase;
-    opacity: 0.6;
-
-    &--done {
-      opacity: 1;
-    }
-  }
-  &__clock-title {
-    margin: 0 0 25px 0;
-    font-size: 12px;
-    // font-family: @font-sans;
-    text-transform: uppercase;
-  }
-  &__clock-label {
-    font-size: 14px;
-    color: var(--accent);
-    margin-top: 25px;
-  }
-  &__clock-error {
-    padding: 5px;
-    font-size: 12px;
-    // font-family: @font-sans;
-    text-transform: uppercase;
-    // color: @cl-red;
-  }
-  // !Часы ====================
 
   &__share {
     position: absolute;

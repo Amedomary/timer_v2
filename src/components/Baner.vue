@@ -1,4 +1,3 @@
-/* eslint-disable prefer-destructuring */
 <template lang="pug">
 
 section.banner(v-if="isLoading")
@@ -55,14 +54,16 @@ export default {
 
     sortData(data) {
       const sortList = _.sortBy(data, ['likes']);
-      this.page_1 = sortList[2];
-      this.page_2 = sortList[1];
-      this.page_3 = sortList[0];
+      [this.page_3, this.page_2, this.page_1] = sortList;
       this.isLoading = false;
     },
   },
 
   mounted() {
+    if (this.$store.state.fireDB) {
+      this.sortData(this.$store.state.fireDB);
+    }
+
     this.$store.subscribe((mutation, state) => {
       this.sortData(state.fireDB);
     });

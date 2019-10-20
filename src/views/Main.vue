@@ -4,9 +4,13 @@
 
     Baner
 
-    ul
-        li(v-for="({ heading, imageSrcBackground }, value ) in $store.state.fireDB")
-            | {{ heading }} : {{ value }}
+    h1(align="center") Другие таймеры
+
+    .conainer
+        ul
+            li(v-for="({ heading, imageSrcBackground }, value ) in $store.state.fireDB")
+                span {{ heading }}
+                span {{ value }}
 
 </template>
 
@@ -27,4 +31,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+li {
+    width: 400px;
+    display: flex;
+    justify-content: space-between;
+}
 </style>

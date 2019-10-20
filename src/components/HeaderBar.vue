@@ -3,8 +3,8 @@ header.header
   span.logo CountDown
   nav.nav
     router-link.nav-link(to="/") Main
-    router-link.nav-link(to="/Countdown") Create yourself
-    router-link.nav-link(to="/Countdown") Go random
+    router-link.nav-link(to="/countdown/0") Create yourself
+    router-link.nav-link(to="/countdown/0") Go random
 
 </template>
 

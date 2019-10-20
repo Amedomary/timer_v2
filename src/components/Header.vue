@@ -1,19 +1,12 @@
 <template lang="pug">
 .header
-    a.link-create(@click="createTimer" href='javascript:void(0)', title='')
-        span(v-if='createTimerShow')
-            span Отмена {{ $store.state.name }}
-        span(v-else-if='weHaveModificateTimer')
-            span Редактировать
-        span(v-else)
-            span Создать свой
-
-    .link-create(@click="acceptCreateTimer", v-if='stateWasModified', href='javascript:void(0)', title='')
-        span Применить изменения
-
-    .link-create(@click="publishNewTimer", v-if='weHaveModificateTimer', href='javascript:void(0)', title='').--release
-        span Опубликовать
-        //- b таймер
+    button.link-create(@click="createTimer", type="button", v-if="checkState('new')") Создать свой
+    button.link-create(@click="cancelTimer", type="button", v-if="checkState('editing')") Отмена
+    button.link-create(@click="editTimer", type="button", v-if="checkState('modified')") Редактировать
+    button.link-create(@click="acceptCreateTimer", v-if="checkState('have-changed')", type="button") Применить изменения
+    button.link-create.link-create--release(
+            @click="publishNewTimer", v-if="checkState('modified')", type="button"
+        ) Опубликовать
 
 </template>
 
@@ -23,16 +16,24 @@ export default {
 
   data() {
     return {
-      createTimerShow: false,
       weHaveModificateTimer: false,
       stateWasModified: false,
     };
   },
 
   methods: {
-    createTimer() {
-      this.createTimerShow = !this.createTimerShow;
+    checkState(string) {
+      return this.$store.state.appState.some(e => e === string);
     },
+
+    createTimer() {
+      this.$store.commit('changeAppState', 1);
+    },
+
+    cancelTimer() {
+      this.$store.commit('changeAppState', 0);
+    },
+
   },
 };
 </script>
@@ -55,6 +56,9 @@ export default {
   display: inline-block;
   vertical-align: top;
   margin-right: 15px;
+  background: none;
+  border: none;
+  cursor: pointer;
 
   &--release {
     font-family: $font-base;
