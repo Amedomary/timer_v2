@@ -4,19 +4,25 @@ section.banner(v-if="isLoading")
     Loader
 
 section.banner(v-else, :class="bannerClass")
-    .image.image--1(@mouseenter="activateImg('1')" @mouseleave="activateImg('')" :style="{ backgroundImage: 'url('+page_1.imageSrcBackground+')'}")
+    .image.image--1(@mouseenter="activateImg('1')" @mouseleave="activateImg('')"
+            :style="{ backgroundImage: `url('${page_1.imageSrcBackground}')`}"
+        )
         .wrapper.left
             p.likes ❤ {{page_1.likes}}
             h2.heading {{page_1.heading}}
             Button(:href="page_1.buttonHref", text='Подробнее')
 
-    .image.image--2(@mouseenter="activateImg('2')" @mouseleave="activateImg('')" :style="{ backgroundImage: 'url('+page_2.imageSrcBackground+')'}")
+    .image.image--2(@mouseenter="activateImg('2')" @mouseleave="activateImg('')"
+            :style="{ backgroundImage: `url('${page_2.imageSrcBackground}')`}"
+        )
         .wrapper.center
             p.likes ❤ {{page_2.likes}}
             h2.heading {{page_2.heading}}
             Button(:href="page_2.buttonHref", text='Подробнее')
 
-    .image.image--3(@mouseenter="activateImg('3')" @mouseleave="activateImg('')" :style="{ backgroundImage: 'url('+page_3.imageSrcBackground+')'}")
+    .image.image--3(@mouseenter="activateImg('3')" @mouseleave="activateImg('')"
+            :style="{ backgroundImage: `url('${page_3.imageSrcBackground}')`}"
+        )
         .wrapper.right
             p.likes ❤ {{page_3.likes}}
             h2.heading {{page_3.heading}}
@@ -25,9 +31,10 @@ section.banner(v-else, :class="bannerClass")
 </template>
 
 <script>
-import _ from 'lodash';
+// import _ from 'lodash';
 import Button from '@/components/Button.vue';
 import Loader from '@/components/Loader.vue';
+import imagesPaths from '@/createPathImages';
 
 export default {
   name: 'Baner',
@@ -52,21 +59,35 @@ export default {
       this.bannerClass = `active-${param}`;
     },
 
-    sortData(data) {
-      const sortList = _.sortBy(data, ['likes']);
-      [this.page_3, this.page_2, this.page_1] = sortList;
+    createBaner() {
+      [this.page_0, this.page_1, this.page_2, this.page_3] = this.$store.state.topList;
+      this.page_1.imageSrcBackground = imagesPaths[this.page_1.imageSrcBackground];
+      this.page_2.imageSrcBackground = imagesPaths[this.page_2.imageSrcBackground];
+      this.page_3.imageSrcBackground = imagesPaths[this.page_3.imageSrcBackground];
       this.isLoading = false;
     },
+
+    // sortData(data) {
+    //   const sortList = _.sortBy(data, ['likes']);
+    //   [this.page_3, this.page_2, this.page_1] = sortList;
+    //   this.isLoading = false;
+    // },
   },
 
   mounted() {
-    if (this.$store.state.fireDB) {
-      this.sortData(this.$store.state.fireDB);
-    }
+    //   получаем значения из бд и запускае формирование банера
+    this.$root.database.ref('topList').once('value')
+      .then((e) => {
+        this.$store.commit('newTopList', e.val());
+        this.createBaner();
+      })
+      .catch((error) => {
+        console.error(error);
+      });
 
-    this.$store.subscribe((mutation, state) => {
-      this.sortData(state.fireDB);
-    });
+    // this.$store.subscribe((mutation, state) => {
+    //   this.sortData(state.fireDB);
+    // });
   },
 };
 </script>

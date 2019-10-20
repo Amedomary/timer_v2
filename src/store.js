@@ -6,11 +6,16 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     fireDB: null,
+    topList: null,
     appState: ['new'], // new, edit, midified
   },
   mutations: {
     newData(state, data) {
       state.fireDB = data;
+    },
+
+    newTopList(state, data) {
+      state.topList = data;
     },
 
     changeAppState(state, code) {
