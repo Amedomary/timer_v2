@@ -5,28 +5,28 @@ section.banner(v-if="isLoading")
 
 section.banner(v-else, :class="bannerClass")
     .image.image--1(@mouseenter="activateImg('1')" @mouseleave="activateImg('')"
-            :style="{ backgroundImage: `url('${page_1.imageSrcBackground}')`}"
+            :style="{ backgroundImage: `url('${page_1.localImg}')`}"
         )
         .wrapper.left
             p.likes ❤ {{page_1.likes}}
             h2.heading {{page_1.heading}}
-            Button(:href="page_1.buttonHref", text='Подробнее')
+            router-link.button(:to="{ name: 'countdown', params: { id: page_1.id }}") Подробнее
 
     .image.image--2(@mouseenter="activateImg('2')" @mouseleave="activateImg('')"
-            :style="{ backgroundImage: `url('${page_2.imageSrcBackground}')`}"
+            :style="{ backgroundImage: `url('${page_2.localImg}')`}"
         )
         .wrapper.center
             p.likes ❤ {{page_2.likes}}
             h2.heading {{page_2.heading}}
-            Button(:href="page_2.buttonHref", text='Подробнее')
+            router-link.button(:to="{ name: 'countdown', params: { id: page_2.id }}") Подробнее
 
     .image.image--3(@mouseenter="activateImg('3')" @mouseleave="activateImg('')"
-            :style="{ backgroundImage: `url('${page_3.imageSrcBackground}')`}"
+            :style="{ backgroundImage: `url('${page_3.localImg}')`}"
         )
         .wrapper.right
             p.likes ❤ {{page_3.likes}}
             h2.heading {{page_3.heading}}
-            Button(:href="page_3.buttonHref", text='Подробнее')
+            router-link.button(:to="{ name: 'countdown', params: { id: page_3.id }}") Подробнее
 
 </template>
 
@@ -61,9 +61,9 @@ export default {
 
     createBaner() {
       [this.page_0, this.page_1, this.page_2, this.page_3] = this.$store.state.topList;
-      this.page_1.imageSrcBackground = imagesPaths[this.page_1.imageSrcBackground];
-      this.page_2.imageSrcBackground = imagesPaths[this.page_2.imageSrcBackground];
-      this.page_3.imageSrcBackground = imagesPaths[this.page_3.imageSrcBackground];
+      this.page_1.localImg = imagesPaths[this.page_1.imageSrcBackground];
+      this.page_2.localImg = imagesPaths[this.page_2.imageSrcBackground];
+      this.page_3.localImg = imagesPaths[this.page_3.imageSrcBackground];
       this.isLoading = false;
     },
 
@@ -75,15 +75,20 @@ export default {
   },
 
   mounted() {
-    //   получаем значения из бд и запускае формирование банера
-    this.$root.database.ref('topList').once('value')
-      .then((e) => {
-        this.$store.commit('newTopList', e.val());
-        this.createBaner();
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    //   проверяем стор
+    if (!this.$store.state.topList) {
+      //   получаем значения из бд и запускае формирование банера
+      this.$root.database.ref('topList').once('value')
+        .then((e) => {
+          this.$store.commit('newTopList', e.val());
+          this.createBaner();
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    } else {
+      this.createBaner();
+    }
 
     // this.$store.subscribe((mutation, state) => {
     //   this.sortData(state.fireDB);

@@ -13,7 +13,7 @@ export default new Router({
     },
     {
       path: '/countdown/:id',
-      name: 'Countdown',
+      name: 'countdown',
       // route level code-splitting
       // this generates a separate chunk (Countdown.[hash].js) for this route
       // which is lazy-loaded when the route is visited.

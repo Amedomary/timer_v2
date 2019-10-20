@@ -53,7 +53,7 @@ export default {
 
   beforeRouteUpdate(to, from, next) {
     // обрабатываем изменение параметров маршрута...
-    console.log(to, from, next);
+    // console.log(to, from, next);
     // не забываем вызвать next()
     next();
   },
@@ -79,11 +79,11 @@ export default {
 
       this.$root.database.ref(`pages/${idPage}`).set(dataJSON)
         .then(() => {
-          console.log('Synchronization succeeded');
+          console.warn('Synchronization succeeded');
           // this.createdNewPage(idPage);
         })
         .catch((error) => {
-          console.log('Synchronization failed');
+          console.error('Synchronization failed');
           console.error(error);
         });
     },
