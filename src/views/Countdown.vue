@@ -6,6 +6,11 @@
         SvgCircle
         Clock
         Description
+        Wallpapers
+        Share
+        PickColor
+        PickWallpaper
+        AlertPage
 
         //- button(@click="publishNewTimer") publishNewTimer
         //- h2 id - {{ $route.params.id }}
@@ -19,6 +24,12 @@ import Header from '@/components/Header.vue';
 import SvgCircle from '@/components/SvgCircle.vue';
 import Clock from '@/components/Clock.vue';
 import Description from '@/components/Description.vue';
+import Share from '@/components/Share.vue';
+import Wallpapers from '@/components/Wallpapers.vue';
+import PickColor from '@/components/PickColor.vue';
+import PickWallpaper from '@/components/PickWallpaper.vue';
+import AlertPage from '@/components/AlertPage.vue';
+
 import bg from '@/assets/images/content/botanik.jpg';
 
 export default {
@@ -29,6 +40,11 @@ export default {
     SvgCircle,
     Clock,
     Description,
+    Share,
+    Wallpapers,
+    PickColor,
+    PickWallpaper,
+    AlertPage,
   },
 
   data() {

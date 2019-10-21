@@ -3,7 +3,9 @@
     button.link-create(@click="createTimer", type="button", v-if="checkState('new')") Создать свой
     button.link-create(@click="cancelTimer", type="button", v-if="checkState('editing')") Отмена
     button.link-create(@click="editTimer", type="button", v-if="checkState('modified')") Редактировать
-    button.link-create(@click="acceptCreateTimer", v-if="checkState('have-changed')", type="button") Применить изменения
+
+    button.link-create(@click="acceptCreateTimer", v-if="checkState('editing') && true", type="button") Применить изменения
+
     button.link-create.link-create--release(
             @click="publishNewTimer", v-if="checkState('modified')", type="button"
         ) Опубликовать
@@ -23,15 +25,19 @@ export default {
 
   methods: {
     checkState(string) {
-      return this.$store.state.appState.some(e => e === string);
+      return this.$store.state.countdown.appState === string;
     },
 
     createTimer() {
-      this.$store.commit('changeAppState', 1);
+      this.$store.commit('changeAppState', 'edit');
     },
 
     cancelTimer() {
-      this.$store.commit('changeAppState', 0);
+      this.$store.commit('changeAppState', 'new');
+    },
+
+    editTimer() {
+      this.$store.commit('changeAppState', 'edit');
     },
 
   },

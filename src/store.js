@@ -7,7 +7,10 @@ export default new Vuex.Store({
   state: {
     fireDB: null,
     topList: null,
-    appState: ['new'], // new, edit, midified
+    countdown: {
+      appState: 'new', // new, editing, midified
+      unsavedChanged: false, // изменения в редактировании
+    },
   },
   mutations: {
     newData(state, data) {
@@ -20,25 +23,16 @@ export default new Vuex.Store({
 
     changeAppState(state, code) {
       switch (code) {
-        case 0:
-          state.appState = ['new'];
+        case 'new':
+          state.countdown.appState = 'new';
+          // TODO: тут мб сбрасывать данные на пропсы
           break;
-        case 1:
-          state.appState = ['editing'];
+        case 'edit':
+          state.countdown.appState = 'editing';
           break;
-        case 2:
-          state.appState = ['editing', 'have-changed'];
+        case 'mod':
+          state.countdown.appState = 'modified';
           break;
-        case 3:
-          state.appState = ['modified'];
-          break;
-        case 4:
-          state.appState = ['editing', 'modified'];
-          break;
-        case 5:
-          state.appState = ['editing', 'modified', 'have-changed'];
-          break;
-
         default:
           break;
       }
