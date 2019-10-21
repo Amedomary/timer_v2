@@ -34,7 +34,7 @@ section.banner(v-else, :class="bannerClass")
 // import _ from 'lodash';
 import Button from '@/components/Button.vue';
 import Loader from '@/components/Loader.vue';
-import imagesPaths from '@/createPathImages';
+import paths from '@/createPathImages';
 
 export default {
   name: 'Baner',
@@ -60,6 +60,7 @@ export default {
     },
 
     createBaner() {
+      const imagesPaths = paths();
       [this.page_0, this.page_1, this.page_2, this.page_3] = this.$store.state.topList;
       this.page_1.localImg = imagesPaths[this.page_1.imageSrcBackground];
       this.page_2.localImg = imagesPaths[this.page_2.imageSrcBackground];
@@ -67,6 +68,7 @@ export default {
       this.isLoading = false;
 
       console.log(imagesPaths);
+      console.log(paths);
     },
 
     // sortData(data) {
