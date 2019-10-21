@@ -1,21 +1,26 @@
 @mixin circle-icon($left-icon) {
-    display: block;
-    position: absolute;
-    left: $left-icon;
-    top: 20%;
-    width: 40px;
-    height: 40px;
-    border-radius: 75%;
-    line-height: 40px;
-    text-align: center;
-    background-color: var(--accent);
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity .5s, color .25s;
+  position: absolute;
+  top: 20%;
+  left: $left-icon;
+  display: block;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  transition: opacity 0.5s, color 0.25s;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  border-radius: 75%;
+  background-color: var(--accent);
+}
 
-    .modification & {
-        pointer-events: all;
-        opacity: 1;
-    }
+@mixin circle-icon-legend {
+  position: absolute;
+  bottom: -24px;
+  left: 50%;
+  padding: 64px 12px 0;
+  font-size: 14px;
+  line-height: 1;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  opacity: 0.8;
 }

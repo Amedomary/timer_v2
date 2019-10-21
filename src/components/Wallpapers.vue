@@ -6,7 +6,7 @@ mixin bg-item(photo, title)
             img.wallpaper-preview(loading="lazy" src=`images/content/preview/${photo}`)
 
 //- aside.wallpaper-side-bar(v-if='wallpaperSideBarOpen')
-aside.wallpaper-side-bar(v-if='true')
+aside.wallpaper-side-bar(v-if='$store.state.countdown.wallpaperIsOpen')
     button.wallpaper-close(@click='wallpaperPickClose')
 
     label.wallpaper-label(for="input_File_Background") Добавить своё изображение

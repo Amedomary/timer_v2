@@ -130,18 +130,6 @@ html, body, #app {
   &__hide-icon {
     display: none;
   }
-
-  &__legend {
-    position: absolute;
-    bottom: -24px;
-    padding: 64px 12px 0;
-    line-height: 1;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 14px;
-    opacity: 0.8;
-    white-space: nowrap;
-  }
 }
 
   // Фон и его смена

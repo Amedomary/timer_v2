@@ -11,6 +11,7 @@ export default new Vuex.Store({
       appState: 'new', // new, editing, midified
       unsavedChanged: false, // изменения в редактировании
       alertIsOpen: false, // открыт алерт
+      wallpaperIsOpen: false,
     },
   },
   mutations: {
