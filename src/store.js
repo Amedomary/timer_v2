@@ -10,6 +10,7 @@ export default new Vuex.Store({
     countdown: {
       appState: 'new', // new, editing, midified
       unsavedChanged: false, // изменения в редактировании
+      alertIsOpen: false, // открыт алерт
     },
   },
   mutations: {

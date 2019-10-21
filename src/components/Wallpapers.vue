@@ -1,7 +1,7 @@
 <template lang="pug">
 mixin bg-item(photo, title)
     li.wallpaper-item(data-wallpaper=`images/content/${photo}`, @click='swapImageBackground')
-        figure.walpaper-figure
+        figure.wallpaper-figure
             figcaption.wallpaper-title= title
             img.wallpaper-preview(loading="lazy" src=`images/content/preview/${photo}`)
 
@@ -34,5 +34,110 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+// Фон и его смена
+.wallpaper-side-bar {
+    position: fixed;
+    z-index: 450;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-flow: column nowrap;
+    width: 20%;
+    min-width: 325px;
+    padding: 25px 0 0 25px;
+    background: var(--accent-dark);
+    // TODO: сделать скролл кастомный
+}
+.wallpaper-close {
+    position: absolute;
+    top: 25px;
+    left: -15px;
+    width: 43px;
+    height: 43px;
+    transform: translateX(-100%);
+    border: 1px solid var(--accent);
+    background-color: var(--accent-dark);
+
+    &:after,
+    &:before {
+        position: absolute;
+        top: 19px;
+        left: 6px;
+        display: block;
+        width: 30px;
+        height: 2px;
+        content: '';
+        transform: rotate(-45deg);
+        transform-origin: center;
+        background-color: var(--accent);
+    }
+    &:before {
+        transform: rotate(45deg);
+    }
+}
+.wallpaper-label {
+    display: block;
+    flex: 0 0 auto;
+    width: auto;
+    margin-right: 25px;
+    margin-bottom: 25px;
+    padding: 12px 16px;
+    font-size: 15px;
+    // font-family: @font-base;
+    color: #ffffff;
+    border: 1px solid var(--accent);
+    border-radius: 0;
+    background: none;
+    background-color: var(--accent-dark);
+}
+.wallpaper-input {
+    display: none;
+}
+.wallpaper-list {
+    overflow-x: auto;
+    flex: 1 1 auto;
+    width: auto;
+    margin-left: -20px;
+    padding: 0;
+    padding: 0 5px 25px 0;
+}
+.wallpaper-item {
+    margin-bottom: 5px;
+    list-style: none;
+    cursor: pointer;
+
+    .no-touchevents &:hover,
+    .touchevents &:active {
+        text-decoration: underline;
+    }
+}
+.wallpaper-figure {
+    position: relative;
+    margin: 0;
+    &:hover {
+        & .b-landing__wallpaper-preview {
+            filter: brightness(1.7);
+        }
+    }
+}
+.wallpaper-title {
+    // font-family: @font-sans;
+    position: absolute;
+    z-index: 800;
+    top: 0;
+    right: 0;
+    left: 0;
+    padding: 10px;
+    padding-bottom: 10px;
+    background-color: var(--accent-hover);
+}
+.wallpaper-preview {
+    display: block;
+    width: 100%;
+    height: 160px;
+    transition: filter .5s;
+    object-fit: cover;
+}
 
 </style>

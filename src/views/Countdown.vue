@@ -1,6 +1,6 @@
 <template lang="pug">
     .landing#landing-app(:class='vueAppClass', v-bind:style="styleApp", v-cloak)
-        img.landing__background(src='', alt='', title='', :class='vueBackClass', v-bind:src="imageSrcBackground")
+        img.background(src='', alt='', title='', :class='vueBackClass', v-bind:src="imageSrcBackground")
         Grid
         Header
         SvgCircle
@@ -136,129 +136,6 @@ html, body, #app {
     background: var(--accent-light); /* Firefox */
   }
 
-  // Фон и его смена
-  &__background {
-    position: absolute;
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0.9;
-    // .transitionModOpacity();
-
-    &.fade {
-      opacity: 0.1;
-    }
-
-    &.hide {
-      opacity: 0;
-    }
-  }
-  &__wallpaper-side-bar {
-    position: fixed;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    display: flex;
-    flex-flow: column nowrap;
-    width: 20%;
-    min-width: 325px;
-    background: var(--accent-dark);
-    z-index: 450;
-    padding: 25px 0 0 25px;
-    // TODO: сделать скролл кастомный
-  }
-  &__wallpaper-close {
-    position: absolute;
-    top: 25px;
-    left: -15px;
-    transform: translateX(-100%);
-    width: 43px;
-    height: 43px;
-    background-color: var(--accent-dark);
-    border: 1px solid var(--accent);
-
-    &:after,
-    &:before {
-      display: block;
-      content: "";
-      position: absolute;
-      top: 19px;
-      left: 6px;
-      width: 30px;
-      height: 2px;
-      background-color: var(--accent);
-      transform: rotate(-45deg);
-      transform-origin: center;
-    }
-    &:before {
-      transform: rotate(45deg);
-    }
-  }
-  &__wallpaper-label {
-    display: block;
-    width: auto;
-    margin-right: 25px;
-    margin-bottom: 25px;
-    flex: 0 0 auto;
-    // font-family: @font-base;
-    color: #fff;
-    background: none;
-    border-radius: 0;
-    border: 1px solid var(--accent);
-    background-color: var(--accent-dark);
-    font-size: 15px;
-    padding: 12px 16px;
-  }
-  &__wallpaper-input {
-    display: none;
-  }
-  &__wallpaper-list {
-    padding: 0;
-    flex: 1 1 auto;
-    overflow-x: auto;
-    padding: 0 5px 25px 0;
-    width: auto;
-    margin-left: -20px;
-  }
-  &__wallpaper-item {
-    list-style: none;
-    margin-bottom: 5px;
-    cursor: pointer;
-
-    .no-touchevents &:hover,
-    .touchevents &:active {
-      text-decoration: underline;
-    }
-  }
-  &__walpaper-figure {
-    position: relative;
-    margin: 0;
-    &:hover {
-      & .b-landing__wallpaper-preview {
-        filter: brightness(1.7);
-      }
-    }
-  }
-  &__wallpaper-title {
-    padding-bottom: 10px;
-    // font-family: @font-sans;
-    position: absolute;
-    z-index: 800;
-    top: 0;
-    left: 0;
-    right: 0;
-    padding: 10px;
-    background-color: var(--accent-hover);
-  }
-  &__wallpaper-preview {
-    display: block;
-    width: 100%;
-    height: 160px;
-    object-fit: cover;
-    transition: filter 0.5s;
-  }
-
   &__hide-icon {
     display: none;
   }
@@ -312,31 +189,24 @@ html, body, #app {
       transform: translateX(-25px);
     }
   }
+}
 
-  &__alert {
-    display: flex;
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 55000;
-    background-color: rgba(0, 0, 0, 0.95);
-    text-align: center;
-    font-size: 40px;
-    padding: 15px;
-    // font-family: @font-sans;
+  // Фон и его смена
+.background {
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+    opacity: .9;
+    object-fit: cover;
+    // .transitionModOpacity();
 
-    &-text {
-      margin: auto;
-      max-width: 700px;
+    &.fade {
+        opacity: .1;
     }
 
-    &-link {
-      margin-top: 15px;
-      display: block;
-      color: #ed1c8a;
+    &.hide {
+        opacity: 0;
     }
-  }
 }
 </style>
