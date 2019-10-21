@@ -12,5 +12,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '@/assets/mixins.scss';
+
+.color-pick {
+    @include circle-icon(60%);
+}
 
 </style>

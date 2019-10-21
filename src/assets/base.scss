@@ -11,13 +11,13 @@
 
 html {
   min-height: 100%;
-  font-size: 16px;
+  font-size: 16px; // сетка
   background-color: #121212;
 }
 
 @media (max-width: 767px) {
   html {
-    font-size: 13px;
+    font-size: 14px;
   }
 }
 
@@ -25,7 +25,7 @@ body {
   min-height: 100%;
   margin: 0;
   padding: 0;
-  font-family: $font-base;
+  font-family: var(--font-base);
   vertical-align: top;
   color: var(--cl-font-main);
   -webkit-font-smoothing: antialiased;
@@ -43,10 +43,17 @@ a,
 button {
   text-decoration: none;
   color: var(--link-main);
+  cursor: pointer;
+  border: none;
+  background: none;
 
   &:hover {
     color: var(--link-hover);
   }
+}
+
+h1,h2,h3,h4,h5,h6 {
+  font-family: var(--font-sans-serif);
 }
 
 .conainer {

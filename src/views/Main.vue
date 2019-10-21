@@ -4,7 +4,7 @@
 
     Baner
 
-    h1(align="center") Другие таймеры
+    h1.heading CountDowns
 
     .conainer
         ul
@@ -31,9 +31,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-li {
-    width: 400px;
-    display: flex;
-    justify-content: space-between;
+.heading {
+    margin: 3rem 0;
+    font-weight: 100;
+    text-align: center;
 }
+
+li {
+    display: inline-flex;
+    justify-content: space-between;
+    width: 33%;
+    padding: 2rem 4rem;
+}
+
 </style>

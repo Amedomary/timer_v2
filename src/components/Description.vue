@@ -70,7 +70,6 @@ export default {
       margin: 0 0 15px 0;
       padding: 0 0 0 3px;
       font-size: 11px;
-      // font-family: @font-sans;
       text-transform: uppercase;
       border: none;
       outline: none;
@@ -79,7 +78,6 @@ export default {
       // .icon-edit-hover(-22px);
   }
   .heading {
-      // font-family: @font-base;
       margin: 0 0 15px 0;
       padding: 0;
       font-size: 47px;

@@ -53,7 +53,6 @@ export default {
   padding: 60px 65px 5px;
   color: #ccc;
   font-weight: 100;
-  font-family: $font-sans;
   font-size: 12px;
 }
 
@@ -67,7 +66,6 @@ export default {
   cursor: pointer;
 
   &--release {
-    font-family: $font-base;
     border-radius: 0;
     border-color: var(--accent);
     border-width: 1px;

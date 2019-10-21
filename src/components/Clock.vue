@@ -92,7 +92,6 @@ export default {
         }
     }
 }
-
 .month {
     display: block;
     margin-bottom: 12px;
@@ -104,7 +103,7 @@ export default {
     position: relative;
     display: inline-block;
     margin-right: 25px;
-    font-family: "Nova Mono";
+    font-family: var(--font-mono);
     font-size: 90px;
     vertical-align: middle;
 
@@ -119,7 +118,7 @@ export default {
 .hour {
     display: inline-block;
     margin-right: 5px;
-    font-family: "Nova Mono";
+    font-family: var(--font-mono);
     font-size: 70px;
     vertical-align: middle;
 }
@@ -133,7 +132,7 @@ export default {
 .minutes {
     display: inline-block;
     margin-right: 5px;
-    font-family: "Nova Mono";
+    font-family: var(--font-mono);
     font-size: 40px;
     vertical-align: middle;
     opacity: 0.75;
@@ -194,5 +193,18 @@ export default {
     font-size: 12px;
     text-transform: uppercase;
     color: red;
+}
+.clock-legend {
+    position: absolute;
+    bottom: -25px;
+    left: 40px;
+    transition: opacity 0.2s, transform 0.5s;
+    opacity: 0;
+    color: var(--accent-light);
+
+    .b-landing__clock.editable:not(.editing):hover & {
+        transform: translateX(-25px);
+        opacity: 1;
+    }
 }
 </style>

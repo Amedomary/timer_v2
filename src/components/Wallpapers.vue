@@ -30,6 +30,11 @@ aside.wallpaper-side-bar(v-if='true')
 <script>
 export default {
   name: 'Wallpapers',
+  methods: {
+    swapImageBackground() {
+      console.log('swapImageBackground');
+    },
+  },
 };
 </script>
 
@@ -84,7 +89,6 @@ export default {
     margin-bottom: 25px;
     padding: 12px 16px;
     font-size: 15px;
-    // font-family: @font-base;
     color: #ffffff;
     border: 1px solid var(--accent);
     border-radius: 0;
@@ -122,7 +126,6 @@ export default {
     }
 }
 .wallpaper-title {
-    // font-family: @font-sans;
     position: absolute;
     z-index: 800;
     top: 0;

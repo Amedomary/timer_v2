@@ -50,7 +50,6 @@ export default {};
 .logo {
   font-size: 1.5rem;
   margin-right: auto;
-  font-family: $font-rubik;
   font-weight: 100;
 }
 

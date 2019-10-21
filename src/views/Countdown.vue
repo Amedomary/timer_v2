@@ -114,15 +114,6 @@ html, body, #app {
   height: 100%;
 }
 
-:root {
-  --theme-color: 53;
-  --accent: hsl(var(--theme-color),60%,40%);
-  --accent-light: hsl(var(--theme-color),71%,57%);
-  --accent-back: hsla(var(--theme-color),53%,29%,.2);
-  --accent-hover: hsla(var(--theme-color),53%,29%,.4);
-  --accent-dark: hsl(var(--theme-color),80%,6%);
-}
-
 .landing {
   width: 100%;
   height: 100%;
@@ -140,30 +131,6 @@ html, body, #app {
     display: none;
   }
 
-  &__share {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 50px;
-    left: 40px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-
-    // .transitionModOpacity();
-
-    &.hide {
-      opacity: 0;
-      pointer-events: none;
-    }
-  }
-
-  &__color-pick {
-    // .circle-icon(60%);
-  }
-
-  &__wallpaper-pick {
-    // .circle-icon(80%);
-  }
-
   &__legend {
     position: absolute;
     bottom: -24px;
@@ -174,20 +141,6 @@ html, body, #app {
     font-size: 14px;
     opacity: 0.8;
     white-space: nowrap;
-  }
-
-  &__clock-legend {
-    position: absolute;
-    bottom: -25px;
-    left: 40px;
-    color: var(--accent-light);
-    opacity: 0;
-    transition: opacity 0.2s, transform 0.5s;
-
-    .b-landing__clock.editable:not(.editing):hover & {
-      opacity: 1;
-      transform: translateX(-25px);
-    }
   }
 }
 

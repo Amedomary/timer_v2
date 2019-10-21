@@ -1,0 +1,18 @@
+:root {
+  // fonts
+  --font-base: "Comfortaa", cursive;
+  --font-sans-serif: 'Rubik', sans-serif;
+  --font-mono: "Nova Mono", monospace;
+
+  // colors
+  --cl-font-main: #fff5e4;
+  --link-main: #fff;
+  --link-hover: var(--accent);
+
+  --theme-color: 311;
+  --accent: hsl(var(--theme-color), 60%, 40%);
+  --accent-light: hsl(var(--theme-color), 71%, 57%);
+  --accent-back: hsla(var(--theme-color), 53%, 29%, 0.2);
+  --accent-hover: hsla(var(--theme-color), 53%, 29%, 0.4);
+  --accent-dark: hsl(var(--theme-color), 80%, 6%);
+}

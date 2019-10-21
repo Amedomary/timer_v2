@@ -1,6 +1,6 @@
 <template lang="pug">
 
-section.banner(v-if="isLoading")
+section.banner(v-if="isLoading", style="display:flex")
     Loader
 
 section.banner(v-else, :class="bannerClass")
@@ -189,7 +189,6 @@ export default {
 
 .heading {
     margin: 0 0 1.5rem;
-    font-family: $font-rubik;
     font-size: 2rem;
     font-weight: 700;
     text-shadow: 2px 2px 6px black;
