@@ -65,6 +65,8 @@ export default {
       this.page_2.localImg = imagesPaths[this.page_2.imageSrcBackground];
       this.page_3.localImg = imagesPaths[this.page_3.imageSrcBackground];
       this.isLoading = false;
+
+      console.log(imagesPaths);
     },
 
     // sortData(data) {
