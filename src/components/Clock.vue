@@ -1,16 +1,5 @@
 <template lang="pug">
-.clock
-    span.month 1
-    span.day
-        span 2
-        i.title 3
-    span.hour 4
-    span.slash 5
-    span.minutes 6
-    span.minutes 7
-    span.minutes 8 TODO
-
-//- .clock(:class='vueClockClass', @click='editClock')
+.clock(:class='vueClockClass', @click='editClock')
     span.month {{ cl_month }}
     span.day
         span {{ cl_days }}
@@ -43,6 +32,87 @@
 <script>
 export default {
   name: '',
+  data() {
+    return {
+      vueClockClass: '',
+      // Таймер =================
+      finishDate: '1575765288276', // (year, month, date, hours, minutes, seconds, ms)
+      monthName: '',
+
+      interval: '',
+      intervalInit: '',
+      cl_month: '',
+      cl_days: '',
+      cl_hours: '',
+      cl_minutes: '',
+      cl_seconds: '',
+      cl_days_title: '',
+
+      clockDateInputError: false,
+      clockTimeInputError: false,
+
+      stateApp: {
+        preLoadingApp: false,
+      },
+      stateEditClock: false,
+    };
+  },
+  methods: {
+    // запускаем таймер
+    startTimer() {
+      this.intervalInit = this.clockFunc();
+      this.interval = setInterval(() => {
+        this.clockFunc();
+      }, 1000);
+    },
+    // Clock ================
+    clockFunc() {
+      // // создаём дату новую
+      const nowDate = new Date();
+
+      const result = (this.finishDate - nowDate); // получаем разницу
+      //   this.finishDate instanceof Date && !isNaN(this.finishDate);
+
+      // Если таймер прошёл
+      if (result < 0) {
+        this.cl_month = "It's over";
+        this.cl_days = '0';
+        this.cl_hours = '00';
+        this.cl_minutes = '00';
+        this.cl_seconds = '00';
+        this.cl_days_title = 'день';
+      } else {
+        let seconds = Math.floor((result / 1000) % 60);
+        let minutes = Math.floor((result / 1000 / 60) % 60);
+        let hours = Math.floor((result / 1000 / 60 / 60) % 24);
+        const days = Math.floor(result / 1000 / 60 / 60 / 24);
+
+        if (seconds < 10) seconds = `0${seconds}`;
+        if (minutes < 10) minutes = `0${minutes}`;
+        if (hours < 10) hours = `0${hours}`;
+
+        this.cl_month = this.monthName;
+        this.cl_days = days;
+        this.cl_hours = hours;
+        this.cl_minutes = minutes;
+        this.cl_seconds = seconds;
+        this.cl_days_title = 'дней';
+
+        if (this.cl_days <= 1) {
+          this.cl_days_title = 'день';
+        }
+      }
+    },
+    createNameOfFinishDate() {
+      this.monthName = this.finishDate.toLocaleString('ru-RU', {
+        month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric',
+      });
+    },
+    editClock() {},
+  },
+  created() {
+    this.startTimer();
+  },
 };
 </script>
 

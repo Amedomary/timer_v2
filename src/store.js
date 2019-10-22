@@ -34,6 +34,7 @@ export default new Vuex.Store({
           break;
         case 'mod':
           state.countdown.appState = 'modified';
+          // тут последние сохранённые скидывать
           break;
         default:
           break;

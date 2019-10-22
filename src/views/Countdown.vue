@@ -4,7 +4,7 @@
         Grid
         Header
         SvgCircle
-        Clock
+        Clock(minutes=2)
         Description
         Wallpapers
         Share
