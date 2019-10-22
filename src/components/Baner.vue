@@ -78,22 +78,18 @@ export default {
   mounted() {
     //   проверяем стор
     if (!this.$store.state.topList) {
+      this.$store.subscribe((mutation, state) => {
+        this.createBaner();
+      });
+
       //   получаем значения из бд и запускае формирование банера
-      this.$root.database.ref('topList').once('value')
-        .then((e) => {
-          this.$store.commit('newTopList', e.val());
-          this.createBaner();
-        })
-        .catch((error) => {
-          console.error(error);
-        });
+      this.$store.dispatch('getDataFromServer', {
+        ref: 'topList',
+        mutations: 'newTopList',
+      });
     } else {
       this.createBaner();
     }
-
-    // this.$store.subscribe((mutation, state) => {
-    //   this.sortData(state.fireDB);
-    // });
   },
 };
 </script>

@@ -108,7 +108,9 @@ export default {
         month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric',
       });
     },
-    editClock() {},
+    editClock() {
+      this.$store.dispatch('getDataForId', 0); // получаем данные для таймера
+    },
   },
   created() {
     this.startTimer();
