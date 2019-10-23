@@ -40,6 +40,35 @@ export default {
       this.$store.commit('changeAppState', 'edit');
     },
 
+    // Отправляем данные в фаирбэйз
+    publishNewTimer() {
+      // const idPage = (Math.floor(Math.random() * 1000000));
+      // const data = this.timerDate;
+      // const dataJSON = {
+      //   id: idPage,
+      //   likes: 0,
+      //   pageTitle: data.pageTitle,
+      //   preHeading: data.preHeading,
+      //   heading: data.heading,
+      //   description: data.description,
+      //   finishDate: data.finishDate,
+      //   imageSrcBackground: data.imageSrcBackground,
+      //   color: data.color,
+      //   buttonText: data.buttonText,
+      //   buttonHref: data.buttonHref,
+      // };
+
+      // database.ref(`pages/${idPage}`).set(dataJSON)
+      //   .then(() => {
+      //     console.warn('Synchronization succeeded');
+      //     // this.createdNewPage(idPage);
+      //   })
+      //   .catch((error) => {
+      //     console.error('Synchronization failed');
+      //     console.error(error);
+      //   });
+    },
+
   },
 };
 </script>

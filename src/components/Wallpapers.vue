@@ -5,7 +5,6 @@ mixin bg-item(photo, title)
             figcaption.wallpaper-title= title
             img.wallpaper-preview(loading="lazy" src=`images/content/preview/${photo}`)
 
-//- aside.wallpaper-side-bar(v-if='wallpaperSideBarOpen')
 aside.wallpaper-side-bar(v-if='$store.state.countdown.wallpaperIsOpen')
     button.wallpaper-close(@click='wallpaperPickClose')
 

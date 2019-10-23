@@ -1,6 +1,6 @@
 <template lang="pug">
 //- svg.circle(x="0px" y="0px" viewBox="0 0 705 705", :class='vueCircleClass')
-svg.circle(x="0px" y="0px" viewBox="0 0 705 705")
+svg.circle(x="0px" y="0px" viewBox="0 0 705 705" :class="{fade: $store.state.countdown.appState === 'editing'}")
     circle.st0( cx="352.5" cy="352.5" r="350.5")
     circle.st1( cx="352.5" cy="352.5" r="225.5")
     circle.st2( cx="70" cy="352.5" r="4")
@@ -11,7 +11,7 @@ svg.circle(x="0px" y="0px" viewBox="0 0 705 705")
 
 <script>
 export default {
-  name: '',
+  name: 'circle',
 };
 </script>
 
@@ -97,7 +97,6 @@ export default {
     transform: rotate(180deg);
   }
 }
-
 @keyframes rotate-2 {
   from {
     transform: rotate(600deg);

@@ -15,8 +15,11 @@ export default {
     Icon,
   },
   methods: {
+    // Выбор цвета ==============
     colorPick() {
-      console.log('colorPick');
+      this.styleApp = { '--theme-color': this.color_i };
+      this.color_i = this.color_i + Math.floor(Math.random() * 17) + 9; // Добавляем рандомный цвет от 9 - 28
+      this.stateWasModified = true;
     },
   },
 };

@@ -27,6 +27,12 @@ export default {
   data() {
     return {};
   },
+  mounted() {
+    this.$store.dispatch('getDataFromServer', {
+      ref: 'pages',
+      mutations: 'newData',
+    }); // получаем данные для таймера
+  },
 };
 </script>
 

@@ -1,13 +1,20 @@
 <template lang="pug">
-.clock(:class='vueClockClass', @click='editClock')
+.clock(v-if="$store.state.countdown.appState === 'loading'")
+    p ГРУЖУ
+
+.clock(v-else-if="$store.state.countdown.appState === 'error'")
+    p 404
+
+//- если загрузилось
+.clock(:class='vueClockClass', @click='editClock', v-else)
     span.month {{ cl_month }}
     span.day
         span {{ cl_days }}
         i.title {{ cl_days_title }}
     span.hour {{ cl_hours }}
-    span.slash(v-if="!stateApp.preLoadingApp") :
+    span.slash :
     span.minutes {{ cl_minutes }}
-    span.minutes(v-if="!stateApp.preLoadingApp") :
+    span.minutes :
     span.minutes {{ cl_seconds }}
 
     //- +icon('pen-solid').--clock-edit TODO::
@@ -50,10 +57,6 @@ export default {
 
       clockDateInputError: false,
       clockTimeInputError: false,
-
-      stateApp: {
-        preLoadingApp: false,
-      },
       stateEditClock: false,
     };
   },
@@ -109,7 +112,7 @@ export default {
       });
     },
     editClock() {
-      this.$store.dispatch('getDataForId', 0); // получаем данные для таймера
+
     },
   },
   created() {

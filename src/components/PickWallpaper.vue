@@ -13,6 +13,11 @@ export default {
   components: {
     Icon,
   },
+  methods: {
+    wallpaperPick() {
+      this.$store.commit('switchWallpaperPick');
+    },
+  },
 };
 </script>
 

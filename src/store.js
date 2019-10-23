@@ -21,17 +21,15 @@ const database = firebase.database();
 
 export default new Vuex.Store({
   state: {
-    fireDB: null,
+    fireDB: {},
     topList: null,
     countdown: {
-      appState: 'new', // new, editing, midified
+      appState: 'new', // new, editing, midified, loading, error
       unsavedChanged: false, // изменения в редактировании
       alertIsOpen: false, // открыт алерт
       wallpaperIsOpen: false,
     },
-    countdownData: {
-      // id: json
-    },
+    countdownData: {},
   },
   mutations: {
     newData(state, data) {
@@ -44,40 +42,58 @@ export default new Vuex.Store({
 
     changeAppState(state, code) {
       switch (code) {
-        case 'new':
+        case 'new': // загружено новое
           state.countdown.appState = 'new';
           // TODO: тут мб сбрасывать данные на пропсы
           break;
-        case 'edit':
+        case 'edit': // состояние редактора
           state.countdown.appState = 'editing';
           break;
-        case 'mod':
+        case 'mod': // исть изменения для публикации
           state.countdown.appState = 'modified';
           // тут последние сохранённые скидывать
+          break;
+        case 'loading': // Загрузка
+          state.countdown.appState = 'loading';
+          break;
+        case 'fail': // Ошибка получения данных
+          state.countdown.appState = 'fail';
           break;
         default:
           break;
       }
     },
 
-    addCountdownData(state, id, data) {
-      state.countdown[id] = data;
+    switchWallpaperPick(state) {
+      state.countdown.wallpaperIsOpen = !state.countdown.wallpaperIsOpen;
     },
 
-
+    addCountdownData(state, data) {
+      state.countdownData = data;
+    },
   },
   actions: {
+    // получаем дааные для таймера
     getDataForId({ commit, state }, id) {
       // если значение уже есть
-      if (state.countdownData[id]) {
+      if (state.countdownData.id === id) {
         return;
       }
-      // если значение есть в базе
+
+      // если значение есть в общей базе
       if (state.fireDB[id]) {
-        commit('addCountdownData', id, state.fireDB[id]);
+        commit('addCountdownData', state.fireDB[id]);
+        return;
       }
-      console.log(id);
-      // TODO
+
+      // Запрашиваем если ничего нет
+      database.ref(`pages/${id}`).once('value')
+        .then((e) => {
+          commit('addCountdownData', e.val());
+        })
+        .catch((error) => {
+          console.error(error);
+        });
     },
 
     getDataFromServer({ commit }, param) {

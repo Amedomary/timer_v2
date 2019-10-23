@@ -14,9 +14,5 @@ new Vue({
   data: {
   },
   mounted() {
-    store.dispatch('getDataFromServer', {
-      ref: 'pages',
-      mutations: 'newData',
-    });
   },
 }).$mount('#app');

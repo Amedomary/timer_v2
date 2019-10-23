@@ -83,9 +83,6 @@
 <script>
 export default {
   name: 'Grid',
-  // props: {
-  //   msg: String,
-  // },
 };
 </script>
 

@@ -1,8 +1,8 @@
 <template lang="pug">
-.description
-    h2.pre-heading heading
-    h1.heading Head
-    p.description-text desck
+.description(v-if="$store.state.countdownData")
+    h2.pre-heading {{$store.state.countdownData.preHeading}}
+    h1.heading {{$store.state.countdownData.heading}}
+    p.description-text {{$store.state.countdownData.description}}
 
 //- .description(:class='descriptionPanel')
     //- TODO: +e('span').legend Изменить описание

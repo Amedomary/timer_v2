@@ -1,24 +1,30 @@
 <template lang="pug">
-    .landing#landing-app(:class='vueAppClass', v-bind:style="styleApp", v-cloak)
-        img.background(src='', alt='', title='', :class='vueBackClass', v-bind:src="imageSrcBackground")
-        Grid
-        Header
-        SvgCircle
-        Clock(minutes=2)
-        Description
-        Wallpapers
-        Share
-        PickColor
-        PickWallpaper
-        AlertPage
-
-        //- button(@click="publishNewTimer") publishNewTimer
-        //- h2 id - {{ $route.params.id }}
+.landing(
+  :class='vueAppClass'
+  v-bind:style="{'--theme-color': $store.state.countdownData.color_i}"
+  v-cloak
+)
+  img.background(
+    src='', alt='', title='',
+    :class="{fade: $store.state.countdown.appState === 'editing'}"
+    v-bind:src="imageSrcBackground"
+  )
+  Grid
+  Header
+  SvgCircle
+  Clock(minutes=2)
+  Description
+  Wallpapers
+  Share
+  PickColor
+  PickWallpaper
+  AlertPage
 
 </template>
 
 <script>
 // @ is an alias to /src
+// import firebase from 'firebase';
 import Grid from '@/components/Grid.vue';
 import Header from '@/components/Header.vue';
 import SvgCircle from '@/components/SvgCircle.vue';
@@ -31,6 +37,8 @@ import PickWallpaper from '@/components/PickWallpaper.vue';
 import AlertPage from '@/components/AlertPage.vue';
 
 import bg from '@/assets/images/content/botanik.jpg';
+
+// const database = firebase.database();
 
 export default {
   name: 'home',
@@ -52,7 +60,6 @@ export default {
       imageSrcBackground: bg,
       styleApp: '',
       vueAppClass: '',
-      vueBackClass: '',
       timerDate: {
         pageTitle: 'headingMessage',
         preHeading: 'preHeadingMessage',
@@ -67,42 +74,18 @@ export default {
     };
   },
 
+  created() {
+    this.$store.dispatch('getDataForId', 0); // получаем данные для таймера
+  },
+
   beforeRouteUpdate(to, from, next) {
     // обрабатываем изменение параметров маршрута...
-    // console.log(to, from, next);
     // не забываем вызвать next()
     next();
   },
 
   methods: {
-    // Отправляем данные в фаирбэйз
-    publishNewTimer() {
-      const idPage = (Math.floor(Math.random() * 1000000));
-      const data = this.timerDate;
-      const dataJSON = {
-        id: idPage,
-        likes: 0,
-        pageTitle: data.pageTitle,
-        preHeading: data.preHeading,
-        heading: data.heading,
-        description: data.description,
-        finishDate: data.finishDate,
-        imageSrcBackground: data.imageSrcBackground,
-        color: data.color,
-        buttonText: data.buttonText,
-        buttonHref: data.buttonHref,
-      };
 
-      this.$root.database.ref(`pages/${idPage}`).set(dataJSON)
-        .then(() => {
-          console.warn('Synchronization succeeded');
-          // this.createdNewPage(idPage);
-        })
-        .catch((error) => {
-          console.error('Synchronization failed');
-          console.error(error);
-        });
-    },
   },
 };
 </script>
@@ -119,6 +102,13 @@ html, body, #app {
   height: 100%;
   position: relative;
   overflow: hidden;
+
+  --theme-color: 311;
+  --accent: hsl(var(--theme-color), 60%, 40%);
+  --accent-light: hsl(var(--theme-color), 71%, 57%);
+  --accent-back: hsla(var(--theme-color), 53%, 29%, 0.2);
+  --accent-hover: hsla(var(--theme-color), 53%, 29%, 0.4);
+  --accent-dark: hsl(var(--theme-color), 80%, 6%);
 
   ::selection {
     background: var(--accent-light); /* Safari */
@@ -140,7 +130,7 @@ html, body, #app {
     height: 100%;
     opacity: .9;
     object-fit: cover;
-    // .transitionModOpacity();
+    transition: opacity .7s;
 
     &.fade {
         opacity: .1;
