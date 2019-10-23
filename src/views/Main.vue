@@ -7,10 +7,12 @@
     h1.heading CountDowns
 
     .conainer
-        ul
-            li(v-for="({ heading, imageSrcBackground }, value ) in $store.state.fireDB")
-                span {{ heading }}
-                span {{ value }}
+        .list
+            .item(v-for="({ heading, imageSrcBackground }, value ) in $store.state.fireDB")
+                img.bg(:src="imageSrcBackground")
+                .content
+                  span {{ heading }}
+                  span {{ value }}
 
 </template>
 
@@ -43,11 +45,46 @@ export default {
     text-align: center;
 }
 
-li {
-    display: inline-flex;
-    justify-content: space-between;
-    width: 33%;
-    padding: 2rem 4rem;
+.list {
+    margin: auto;
+    width: 1020px;
+}
+
+.item {
+    position: relative;
+    display: inline-block;
+    width: 400px;
+    height: 200px;
+    margin: 10px 0;
+    background: #cccccc;
+
+    clip-path: polygon(115px 0, 100% 0, 285px 100%, 0 100%);
+    shape-outside: polygon(115px 0, 100% 0, 285px 100%, 0 100%);
+
+    &:nth-child(3n + 2) {
+        margin-right: -90px;
+        margin-left: -90px;
+    }
+}
+
+.bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.content {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
 </style>
