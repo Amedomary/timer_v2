@@ -64,7 +64,6 @@ export default {
         stroke-width: 8;
     }
 }
-
 @keyframes war-line-c {
     0% {
         transform: rotate(0);

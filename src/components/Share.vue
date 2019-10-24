@@ -1,8 +1,5 @@
 <template lang="pug">
-//- .share(:class='vueShareClass')
 .share(v-if="$store.state.countdown.appState !== 'editing'")
-    //- +icon--link('vk').--share.--vk
-    //- +icon--link('fb').--share
     button(type="button")
         Icon.fab.fa-vk
     button(type="button")

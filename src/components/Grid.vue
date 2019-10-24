@@ -78,6 +78,7 @@
       // 12
       rect.svg-grid__plus(x="80%" y="calc(80% - 5px)" width="1px" height="11px")
       rect.svg-grid__plus(x="calc(80% - 5px)" y="80%" width="11px" height="1px")
+
 </template>
 
 <script>

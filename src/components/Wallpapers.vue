@@ -6,7 +6,7 @@ mixin bg-item(photo, title)
             img.wallpaper-preview(loading="lazy" src=`images/content/preview/${photo}`)
 
 aside.wallpaper-side-bar(v-if='$store.state.countdown.wallpaperIsOpen')
-    button.wallpaper-close(@click='wallpaperPickClose')
+    button.wallpaper-close(@click='wallpaperClose')
 
     label.wallpaper-label(for="input_File_Background") Добавить своё изображение
     input.wallpaper-input(id='input_File_Background', type="file", name="background", @change="changeImageBackground")
@@ -31,7 +31,11 @@ export default {
   name: 'Wallpapers',
   methods: {
     swapImageBackground() {
-      console.log('swapImageBackground');
+      // TODO pick wallpapers
+      this.$store.commit('switchWallpaperPick');
+    },
+    wallpaperClose() {
+      this.$store.commit('switchWallpaperPick');
     },
   },
 };

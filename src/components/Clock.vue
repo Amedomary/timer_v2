@@ -6,7 +6,11 @@
     p 404
 
 //- если загрузилось
-.clock(:class='vueClockClass', @click='editClock', v-else)
+.clock(
+    :class="{ editable: this.$store.state.countdown.appState === 'editing' }"
+    @click='editClock'
+    v-else
+)
     span.month {{ cl_month }}
     span.day
         span {{ cl_days }}
@@ -14,10 +18,11 @@
     span.hour {{ cl_hours }}
     span.slash :
     span.minutes {{ cl_minutes }}
-    span.minutes :
+    span.slash :
     span.minutes {{ cl_seconds }}
 
-    //- +icon('pen-solid').--clock-edit TODO::
+    i.icon-clock-edit
+        Icon.fas.fa-pen
     span.clock-legend Изменить дату
 
     .clock-form-back(v-if='stateEditClock')
@@ -32,22 +37,26 @@
 
             .clock-form-link-wrap
                 a.clock-form-link(href='javascript:void(0)', title='', @click='cancelEditClock' tabindex="0") Отмена
-                a.clock-form-link--done(href='javascript:void(0)', title='', @click='acceptEditClock' tabindex="0") Готово
+                a.clock-form-link.clock-form-link--done(href='javascript:void(0)', title='', @click='acceptEditClock' tabindex="0") Готово
 
 </template>
 
 <script>
+import Icon from '@/components/Icon.vue';
+
 export default {
   name: '',
+  components: {
+    Icon,
+  },
   data() {
     return {
-      vueClockClass: '',
       // Таймер =================
       finishDate: '1575765288276', // (year, month, date, hours, minutes, seconds, ms)
       monthName: '',
 
-      interval: '',
-      intervalInit: '',
+      //   interval: '',
+      //   intervalInit: '',
       cl_month: '',
       cl_days: '',
       cl_hours: '',
@@ -63,9 +72,11 @@ export default {
   methods: {
     // запускаем таймер
     startTimer() {
-      this.intervalInit = this.clockFunc();
-      this.interval = setInterval(() => {
-        this.clockFunc();
+      this.clockFunc();
+      setInterval(() => {
+        if (this.$store.state.countdown.appState !== 'editing') {
+          this.clockFunc();
+        }
       }, 1000);
     },
     // Clock ================
@@ -73,7 +84,7 @@ export default {
       // // создаём дату новую
       const nowDate = new Date();
 
-      const result = (this.finishDate - nowDate); // получаем разницу
+      const result = this.finishDate - nowDate; // получаем разницу
       //   this.finishDate instanceof Date && !isNaN(this.finishDate);
 
       // Если таймер прошёл
@@ -108,12 +119,13 @@ export default {
     },
     createNameOfFinishDate() {
       this.monthName = this.finishDate.toLocaleString('ru-RU', {
-        month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
       });
     },
-    editClock() {
-
-    },
+    editClock() {},
   },
   created() {
     this.startTimer();
@@ -126,7 +138,7 @@ export default {
     position: absolute;
     bottom: 50%;
     left: 20%;
-    padding-bottom: 10px;
+    padding: 10px;
     font-weight: 100;
 
     &:after {
@@ -142,9 +154,8 @@ export default {
     &.editable {
         cursor: pointer;
 
-        .b-icon--clock-edit {
+        .icon-clock-edit {
             display: block;
-            transition: opacity 0.2s;
             opacity: 0.2;
         }
 
@@ -152,10 +163,10 @@ export default {
             transition: 0.2s;
         }
 
-        .no-touchevents &:hover,
-        .touchevents &:active {
-            .b-icon--clock-edit {
-                opacity: 0.8;
+        &:hover {
+            .icon-clock-edit {
+                opacity: 1;
+                color: var(--accent);
             }
 
             &:after {
@@ -192,32 +203,35 @@ export default {
 }
 .hour {
     display: inline-block;
-    margin-right: 5px;
+    padding: 0 3px;
     font-family: var(--font-mono);
     font-size: 70px;
+    line-height: 80px;
     vertical-align: middle;
 }
 .slash {
     display: inline-block;
-    margin-right: 5px;
+    padding: 0 3px;
     font-size: 38px;
+    line-height: 80px;
     vertical-align: middle;
     opacity: 0.2;
 }
 .minutes {
     display: inline-block;
-    margin-right: 5px;
+    padding: 0 3px;
     font-family: var(--font-mono);
     font-size: 40px;
+    line-height: 80px;
     vertical-align: middle;
     opacity: 0.75;
 }
 .clock-form-back {
     position: absolute;
     z-index: 560;
-    top: 59px;
-    left: 41px;
-    width: 350px;
+    top: -10px;
+    left: -10px;
+    width: calc(100% + 20px);
     padding: 12px;
     cursor: default;
     background-color: var(--accent-back);
@@ -233,12 +247,17 @@ export default {
     background-color: var(--accent-dark);
 }
 .clock-input {
+    display: block;
+    zoom: 1;
+    width: 100%;
     margin: 0;
     padding: 0 4px 4px 4px;
     font-size: 25px;
     border: none;
     border-bottom: 1px solid var(--accent);
     background-color: transparent;
+    box-shadow: none;
+    color: #fff;
 }
 .clock-form-link-wrap {
     margin-top: 35px;
@@ -259,6 +278,7 @@ export default {
     text-transform: uppercase;
 }
 .clock-label {
+    display: block;
     margin-top: 25px;
     font-size: 14px;
     color: var(--accent);
@@ -273,13 +293,22 @@ export default {
     position: absolute;
     bottom: -25px;
     left: 40px;
-    transition: opacity 0.2s, transform 0.5s;
+    transition: opacity 0.2s, transform 0.3s;
     opacity: 0;
     color: var(--accent-light);
 
-    .b-landing__clock.editable:not(.editing):hover & {
+    .clock.editable:not(.editing):hover & {
         transform: translateX(-25px);
         opacity: 1;
     }
+}
+.icon-clock-edit {
+    display: none;
+    position: absolute;
+    font-size: 18px;
+    top: 59px;
+    left: -48px;
+    padding: 20px 30px 20px 10px;
+    transition: .2s;
 }
 </style>

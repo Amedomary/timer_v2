@@ -17,9 +17,9 @@ export default {
   methods: {
     // Выбор цвета ==============
     colorPick() {
-      this.styleApp = { '--theme-color': this.color_i };
-      this.color_i = this.color_i + Math.floor(Math.random() * 17) + 9; // Добавляем рандомный цвет от 9 - 28
-      this.stateWasModified = true;
+      const color = this.$store.state.countdownData.color_i;
+      this.$store.state.countdownData.color_i = color + Math.floor(Math.random() * 17) + 9; // Добавляем рандомный цвет от 9 - 28
+      this.$store.state.countdown.unsavedChanged = true;
     },
   },
 };

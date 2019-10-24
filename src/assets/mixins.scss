@@ -15,9 +15,9 @@
 
 @mixin circle-icon-legend {
   position: absolute;
-  bottom: -24px;
+  bottom: -36px;
   left: 50%;
-  padding: 64px 12px 0;
+  padding: 64px 12px 12px;
   font-size: 14px;
   line-height: 1;
   transform: translateX(-50%);

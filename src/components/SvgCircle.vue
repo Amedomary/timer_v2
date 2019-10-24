@@ -1,5 +1,4 @@
 <template lang="pug">
-//- svg.circle(x="0px" y="0px" viewBox="0 0 705 705", :class='vueCircleClass')
 svg.circle(x="0px" y="0px" viewBox="0 0 705 705" :class="{fade: $store.state.countdown.appState === 'editing'}")
     circle.st0( cx="352.5" cy="352.5" r="350.5")
     circle.st1( cx="352.5" cy="352.5" r="225.5")
@@ -7,11 +6,12 @@ svg.circle(x="0px" y="0px" viewBox="0 0 705 705" :class="{fade: $store.state.cou
     circle.st3( cx="70" cy="352.5" r="5")
     circle.st4( cx="70" cy="352.5" r="3")
     circle.st5( cx="70" cy="352.5" r="6")
+
 </template>
 
 <script>
 export default {
-  name: 'circle',
+  name: 'svgCircle',
 };
 </script>
 
@@ -56,7 +56,7 @@ export default {
   .st1 {
     animation-duration: 120s;
     stroke: var(--accent-light);
-    stroke-width: 2px;
+    stroke-width: 3px;
 
     stroke-dasharray: 2, 8;
     stroke-miterlimit: 10;
