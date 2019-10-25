@@ -16,8 +16,11 @@
   Description
   Wallpapers
   Share
+  Likes
+
   PickColor
   PickWallpaper
+
   AlertPage
 
 </template>
@@ -35,6 +38,7 @@ import Wallpapers from '@/components/Wallpapers.vue';
 import PickColor from '@/components/PickColor.vue';
 import PickWallpaper from '@/components/PickWallpaper.vue';
 import AlertPage from '@/components/AlertPage.vue';
+import Likes from '@/components/Likes.vue';
 
 import bg from '@/assets/images/content/botanik.jpg';
 
@@ -53,6 +57,7 @@ export default {
     PickColor,
     PickWallpaper,
     AlertPage,
+    Likes,
   },
 
   data() {
@@ -131,6 +136,8 @@ html, body, #app {
     opacity: .9;
     object-fit: cover;
     transition: opacity .7s;
+    user-select: none;
+    pointer-events: none;
 
     &.fade {
         opacity: .1;

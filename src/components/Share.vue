@@ -1,9 +1,13 @@
 <template lang="pug">
 .share(v-if="$store.state.countdown.appState !== 'editing'")
-    button(type="button")
+    button.button(type="button" style="--color-share-hover: var(--accent-light)")
+        Icon.far.fa-calendar-alt
+    button.button(type="button" style="--color-share-hover: #4d7198")
         Icon.fab.fa-vk
-    button(type="button")
+    button.button(type="button" style="--color-share-hover: #3b5998")
         Icon.fab.fa-facebook-f
+    button.button(type="button" style="--color-share-hover: #02ABEF")
+        Icon.fab.fa-twitter
 
 </template>
 
@@ -28,9 +32,19 @@ export default {
     border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
+.button {
+    & + & {
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    &:hover {
+        background-color: var(--color-share-hover);
+    }
+}
+
 .icon {
     display: inline-block;
-    width: 50px;
+    width: 48px;
     height: 50px;
     padding: 15px;
     line-height: 20px;

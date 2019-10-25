@@ -37,6 +37,9 @@ export default {
     wallpaperClose() {
       this.$store.commit('switchWallpaperPick');
     },
+    changeImageBackground() {
+      console.log('changeImageBackground');
+    },
   },
 };
 </script>

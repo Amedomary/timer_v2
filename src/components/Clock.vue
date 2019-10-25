@@ -52,7 +52,7 @@ export default {
   data() {
     return {
       // Таймер =================
-      finishDate: '1575765288276', // (year, month, date, hours, minutes, seconds, ms)
+      finishDate: '', // (year, month, date, hours, minutes, seconds, ms)
       monthName: '',
 
       //   interval: '',
@@ -67,9 +67,13 @@ export default {
       clockDateInputError: false,
       clockTimeInputError: false,
       stateEditClock: false,
+      // class
     };
   },
   methods: {
+    checkEditing() {
+      return this.$store.state.countdown.appState === 'editing';
+    },
     // запускаем таймер
     startTimer() {
       this.clockFunc();
@@ -85,7 +89,7 @@ export default {
       const nowDate = new Date();
 
       const result = this.finishDate - nowDate; // получаем разницу
-      //   this.finishDate instanceof Date && !isNaN(this.finishDate);
+      // this.finishDate instanceof Date && !isNaN(this.finishDate);
 
       // Если таймер прошёл
       if (result < 0) {
@@ -125,10 +129,70 @@ export default {
         minute: 'numeric',
       });
     },
-    editClock() {},
+    // включаем состояние редактирования даты
+    editClock() {
+      if (this.checkEditing()) {
+        this.stateEditClock = true;
+      }
+    },
+    cancelEditClock() {
+      setTimeout(() => {
+        // таймаут для удаления самого себя
+        this.stateEditClock = false; // off состояние редактирования даты
+        this.clockDateInputError = false;
+        this.clockTimeInputError = false;
+      }, 30);
+    },
+    acceptEditClock() {
+      const $clockInputDate = this.$refs.elClockInputDate;
+      const $clockInputTime = this.$refs.elClockInputTime;
+
+      this.clockDateInputError = ($clockInputDate.value === '');
+      this.clockTimeInputError = ($clockInputTime.value === '');
+
+      // Проверка. Ввели-ли мы значения?
+      if (!this.clockDateInputError && !this.clockTimeInputError) {
+        const clockDateImputYear = Number(
+          $clockInputDate.value.split('-')[0],
+        );
+        const clockDateImputMouth = Number($clockInputDate.value.split('-')[1]) - 1;
+        const clockDateImputDay = Number(
+          $clockInputDate.value.split('-')[2],
+        );
+        const clockDateImputHour = Number(
+          $clockInputTime.value.split(':')[0],
+        );
+        const clockDateImputMinutes = Number(
+          $clockInputTime.value.split(':')[1],
+        );
+
+        this.finishDate = new Date(
+          clockDateImputYear,
+          clockDateImputMouth,
+          clockDateImputDay,
+          clockDateImputHour,
+          clockDateImputMinutes,
+          0,
+        );
+        this.$store.state.countdownData.finishDate = this.finishDate.toString();
+        this.createNameOfFinishDate();
+        this.clockFunc();
+        this.$store.state.countdown.unsavedChanged = true;
+        // таймаут для удаления самого себя
+        setTimeout(() => {
+          this.stateEditClock = false;
+        }, 100); // off состояние редактирования даты
+      }
+    },
   },
   created() {
-    this.startTimer();
+    this.$store.subscribe((mutation, state) => {
+      if (state.countdownData.heading) {
+        this.finishDate = new Date(state.countdownData.finishDate);
+        this.createNameOfFinishDate();
+        this.startTimer();
+      }
+    });
   },
 };
 </script>
@@ -309,6 +373,6 @@ export default {
     top: 59px;
     left: -48px;
     padding: 20px 30px 20px 10px;
-    transition: .2s;
+    transition: 0.2s;
 }
 </style>

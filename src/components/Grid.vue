@@ -94,6 +94,7 @@ export default {
   display: block;
   width: 100%;
   height: 100%;
+  pointer-events: none;
 
   &__line {
     stroke-width: 1px;

@@ -3,14 +3,17 @@
     h1.heading Загрузка
     p.description-text Пожалуйста подождите
 
-.description(:class='descriptionPanel' v-else="$store.state.countdownData")
+.description(
+    :class='{ editable: this.$store.state.countdown.appState === "editing" }'
+    v-else="$store.state.countdownData"
+)
     h2.pre-heading(
         :class='vuePreHeadingClass'
         v-if="!stateEditPreHeading"
         @click='editPreHeading'
     )
         | {{$store.state.countdownData.preHeading}}
-        //- +icon('pen-solid').--heading-edit
+        Icon.fas.fa-pen
     .description-input-wrapper(v-else)
         input.pre-heading(
             ref='elInputPreHeading'
@@ -24,9 +27,9 @@
         i.accept-edit-description.--pre-heading(:class='vueAcceptEditDescription')
 
     //- Заголовок
-    h1.heading(:class='vueHeadingClass', v-if="!stateEditHeading", @click='editHeading')
+    h1.heading(v-if="!stateEditHeading", @click='editHeading')
         | {{$store.state.countdownData.heading}}
-        //- +icon('pen-solid').--heading-edit
+        Icon.fas.fa-pen
     .description-input-wrapper(v-else)
         input.heading(ref='elInputHeading', id='elInputHeading', type='text', placeholder='Ваш заголовок', name='', v-model="headingMessage", @blur='compleateEditHeading')
         i.accept-edit-description.--heading(:class='vueAcceptEditDescription')
@@ -34,7 +37,7 @@
     //- Описание
     p.description-text(:class='vueDescriptionTextClass', v-if='!stateEditDescriptionText', @click='editDescriptionText')
         | {{$store.state.countdownData.description}}
-        //- +icon('pen-solid').--heading-edit
+        Icon.fas.fa-pen
     .description-input-wrapper(v-else)
         input.description-text(ref='elInputDescriptionText', id='elInputDescriptionText', type='text', placeholder='Ваше описание', name='', v-model="descriptionTextMessage", @blur='compleateEditDescriptionText')
         i.accept-edit-description.--description(:class='vueAcceptEditDescription')
@@ -43,7 +46,7 @@
     a.hide-icon(@click='hideDescriptionPanel')
 
     .button-wrapper(:class='vueButtonClass' @click='editButton')
-        //- +icon('pen-solid').--heading-edit
+        Icon.fas.fa-pen
         //- div(title="", class="addeventatc b-button b-button--flower")
         a.button(target="_blank" :href="flowerButton.link")
             span {{ flowerButton.text }}
@@ -66,11 +69,16 @@
 </template>
 
 <script>
+import Icon from '@/components/Icon.vue';
+
 export default {
-  name: '',
+  name: 'Description',
+  components: {
+    Icon,
+  },
   data() {
     return {
-      descriptionPanel: 'hide',
+      //   descriptionPanel: 'hide',
       vuePreHeadingClass: '',
       vueAcceptEditDescription: '',
       vueDescriptionTextClass: '',
@@ -137,6 +145,35 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@mixin icon-edit-hover($mixin-top) {
+    .icon {
+        opacity: 0.2;
+    }
+
+    .editable & {
+        position: relative;
+        cursor: pointer;
+        transition: color 0.2s;
+
+        .icon {
+            top: $mixin-top;
+            display: block;
+            transition: opacity 0.2s;
+            opacity: 0.1;
+        }
+
+        &:hover {
+            opacity: 1;
+            color: var(--accent-light);
+
+            .icon {
+                opacity: 1;
+                color: var(--accent);
+            }
+        }
+    }
+}
+
 .description {
     position: absolute;
     right: 40px;
@@ -152,8 +189,9 @@ export default {
     border: none;
     outline: none;
     background: none;
+    text-shadow: 1px 1px 1px black;
 
-    // .icon-edit-hover(-22px);
+    @include icon-edit-hover(-22px);
 }
 .heading {
     margin: 0 0 15px 0;
@@ -162,8 +200,9 @@ export default {
     border: none;
     outline: none;
     background: none;
+    text-shadow: 1px 1px 3px black;
 
-    // .icon-edit-hover(-7px);
+    @include icon-edit-hover(-2px);
 }
 .description-text {
     width: 340px;
@@ -176,8 +215,9 @@ export default {
     border: none;
     outline: none;
     background: none;
+    text-shadow: 1px 1px 2px black;
 
-    // .icon-edit-hover(-27px)
+    @include icon-edit-hover(0px);
 }
 .description-input-wrapper {
     position: relative;
@@ -201,7 +241,7 @@ export default {
         display: block;
         width: 24px;
         height: 2px;
-        content: '';
+        content: "";
         transform: rotate(-45deg);
         transform-origin: center;
         background-color: var(--accent);
@@ -234,32 +274,25 @@ export default {
 }
 .button-wrapper {
     position: relative;
-    // .icon-edit-hover(-51px);
+
+    @include icon-edit-hover(-58px);
 }
 .button {
     position: absolute;
     bottom: 0;
     display: inline-block;
     padding: 16px 22px;
-    // padding: 15px;
-    // font-family: @font-base;
-    // font-size: 15px;
     font-size: 1rem;
     line-height: 1;
-    transition: .2s;
+    transition: 0.2s;
     text-align: center;
     text-decoration: none;
     color: #ffffff !important;
     border: 1px solid var(--accent);
-    // border-width: 1px;
-    // border-color: var(--accent);
     border-radius: 0;
-    // border-radius: 5px;
-    // background: none;
     background-color: var(--accent-back);
 
     &:hover {
-        // font-size: 15px;
         border-color: var(--accent);
         background-color: var(--accent-hover);
     }
@@ -279,7 +312,7 @@ export default {
         position: absolute;
         width: 1px;
         height: 1px;
-        content: '';
+        content: "";
         background-color: var(--accent);
     }
     &:after {
@@ -294,4 +327,11 @@ export default {
     }
 }
 
+.icon {
+    position: absolute;
+    left: -50px;
+    display: none;
+    padding: 20px 30px 10px 10px;
+    font-size: 18px;
+}
 </style>

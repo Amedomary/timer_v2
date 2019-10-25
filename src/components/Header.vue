@@ -87,7 +87,7 @@ export default {
   padding: 60px 65px 5px;
   color: #ccc;
   font-weight: 100;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .link-create {
