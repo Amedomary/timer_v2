@@ -20,6 +20,10 @@
 </template>
 
 <script>
+/* eslint-disable vars-on-top */
+/* eslint-disable no-var */
+/* eslint-disable no-plusplus */
+
 import {
   TweenMax,
   Back,
