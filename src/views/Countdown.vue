@@ -137,7 +137,6 @@ html, body, #app {
     object-fit: cover;
     transition: opacity .7s;
     user-select: none;
-    pointer-events: none;
 
     &.fade {
         opacity: .1;
@@ -146,5 +145,36 @@ html, body, #app {
     &.hide {
         opacity: 0;
     }
+}
+
+// like animation
+.dots {
+  width: 6px;
+  height: 6px;
+  position: absolute;
+  top: 2px;
+  left: 4px;
+  background-color:rgb(255, 0, 0);
+  border-radius: 50%;
+}
+
+.hearts {
+  transform: translate(-50%, -50%);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  opacity: 0;
+}
+
+.circ {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  position: absolute;
+  top: 3px;
+  left: 6px;
+  transform: translate(-4px, 0px);
+  cursor: pointer;
+  border: 1px solid rgb(255, 255, 255);
 }
 </style>

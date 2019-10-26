@@ -1,9 +1,25 @@
 <template lang="pug">
 .clock(v-if="$store.state.countdown.appState === 'loading'")
-    p ГРУЖУ
+    span.month Загрузка
+    span.day
+        span ?
+        i.title
+    span.hour ??
+    span.slash :
+    span.minutes ??
+    span.slash :
+    span.minutes ??
 
 .clock(v-else-if="$store.state.countdown.appState === 'error'")
-    p 404
+    span.month e
+    span.day
+        span 3
+        i.title 2
+    span.hour e
+    span.slash :
+    span.minutes rr
+    span.slash :
+    span.minutes or
 
 //- если загрузилось
 .clock(
@@ -55,8 +71,6 @@ export default {
       finishDate: '', // (year, month, date, hours, minutes, seconds, ms)
       monthName: '',
 
-      //   interval: '',
-      //   intervalInit: '',
       cl_month: '',
       cl_days: '',
       cl_hours: '',
@@ -67,7 +81,6 @@ export default {
       clockDateInputError: false,
       clockTimeInputError: false,
       stateEditClock: false,
-      // class
     };
   },
   methods: {
@@ -87,9 +100,7 @@ export default {
     clockFunc() {
       // // создаём дату новую
       const nowDate = new Date();
-
       const result = this.finishDate - nowDate; // получаем разницу
-      // this.finishDate instanceof Date && !isNaN(this.finishDate);
 
       // Если таймер прошёл
       if (result < 0) {
@@ -98,7 +109,7 @@ export default {
         this.cl_hours = '00';
         this.cl_minutes = '00';
         this.cl_seconds = '00';
-        this.cl_days_title = 'день';
+        this.cl_days_title = 'деней';
       } else {
         let seconds = Math.floor((result / 1000) % 60);
         let minutes = Math.floor((result / 1000 / 60) % 60);

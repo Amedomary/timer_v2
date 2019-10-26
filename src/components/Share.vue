@@ -1,5 +1,7 @@
 <template lang="pug">
-.share(v-if="$store.state.countdown.appState !== 'editing'")
+.share(v-if="$store.state.countdown.appState === 'loading'")
+
+.share(v-else-if="$store.state.countdown.appState !== 'editing'")
     button.button(type="button" style="--color-share-hover: var(--accent-light)")
         Icon.far.fa-calendar-alt
     button.button(type="button" style="--color-share-hover: #4d7198")

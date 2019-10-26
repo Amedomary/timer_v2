@@ -24,12 +24,13 @@ export default new Vuex.Store({
     fireDB: {},
     topList: null,
     countdown: {
-      appState: 'new', // new, editing, midified, loading, error
+      appState: 'loading', // new, editing, midified, loading, error
       unsavedChanged: false, // изменения в редактировании
       alertIsOpen: false, // открыт алерт
       wallpaperIsOpen: false,
     },
     countdownData: {},
+    firebaseDB: database,
   },
   mutations: {
     newData(state, data) {
@@ -70,6 +71,7 @@ export default new Vuex.Store({
 
     addCountdownData(state, data) {
       state.countdownData = data;
+      this.commit('changeAppState', 'new');
     },
   },
   actions: {
@@ -93,6 +95,7 @@ export default new Vuex.Store({
         })
         .catch((error) => {
           console.error(error);
+          this.commit('changeAppState', 'fail');
         });
     },
 

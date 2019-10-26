@@ -14,5 +14,6 @@ new Vue({
   data: {
   },
   mounted() {
+    console.clear();
   },
 }).$mount('#app');

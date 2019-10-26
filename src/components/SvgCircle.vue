@@ -25,6 +25,7 @@ export default {
   width: 37%;
   height: auto;
   transform: translate(-50%, -50%);
+  pointer-events: none;
 
   &.fade {
     opacity: 0.5;
