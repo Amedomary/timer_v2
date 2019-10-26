@@ -8,7 +8,10 @@
   .text Загрузка
 
 
-.likes(v-else-if="this.$store.state.countdown.appState === 'new'")
+.likes(
+  v-else-if="this.$store.state.countdown.appState === 'new' || this.$store.state.countdown.appState === 'editing'"
+  :class="{hide: this.$store.state.countdown.appState === 'editing'}"
+)
   .wrapper
     span#hearContainer
       Icon.fas.fa-heart#bigHeart
@@ -196,6 +199,11 @@ export default {
   left: 60px;
   cursor: default;
   padding: 6px;
+  transition: opacity .2s;
+
+  &.hide {
+    opacity: 0;
+  }
 
   &:hover {
     .text {
@@ -235,15 +243,5 @@ export default {
   position: relative;
   margin-right: 8px;
 }
-
-// .dots {
-//   width: 7px;
-//   height: 7px;
-//   position: absolute;
-//   left: 50%;
-//   top: 50%;
-//   background-color:red;
-//   border-radius: 50%;
-// }
 
 </style>

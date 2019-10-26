@@ -41,6 +41,7 @@ export default {
 
     &:hover {
         background-color: var(--color-share-hover);
+        color: var(--color-main);
     }
 }
 

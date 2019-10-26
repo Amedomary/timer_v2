@@ -182,15 +182,15 @@ export default {
     left: 60%;
 }
 .pre-heading {
-    margin: 0 0 15px 0;
+    margin: 0 0 10px 0;
     padding: 0 0 0 3px;
-    font-size: 11px;
+    font-size: 12px;
     text-transform: uppercase;
     border: none;
     outline: none;
     background: none;
     text-shadow: 1px 1px 1px black;
-
+    font-weight: normal;
     @include icon-edit-hover(-22px);
 }
 .heading {
@@ -216,7 +216,7 @@ export default {
     outline: none;
     background: none;
     text-shadow: 1px 1px 2px black;
-
+    font-family: var(--font-sans-serif);
     @include icon-edit-hover(0px);
 }
 .description-input-wrapper {

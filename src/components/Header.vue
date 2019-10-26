@@ -10,6 +10,8 @@
             @click="publishNewTimer", v-if="checkState('modified')", type="button"
         ) Опубликовать
 
+    router-link.link-create.link-create--main(to="/") Main
+
 </template>
 
 <script>
@@ -82,7 +84,8 @@ export default {
 @import "../assets/variables.scss";
 
 .header {
-  text-transform: uppercase;
+  display: flex;
+  flex-flow: row nowrap;
   position: relative;
   padding: 60px 65px 5px;
   color: #ccc;
@@ -98,6 +101,10 @@ export default {
   background: none;
   border: none;
   cursor: pointer;
+
+  &--main {
+    margin-left: auto;
+  }
 
   &--release {
     border-radius: 0;
