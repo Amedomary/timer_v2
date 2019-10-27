@@ -1,16 +1,17 @@
 <template lang="pug">
 
-.likes(v-if="this.$store.state.countdown.appState === 'loading'")
+.likes(v-if="checkState('loading')")
   .wrapper
     span#hearContainer
       Icon.fas.fa-heart.--loading#bigHeart
     .count ---
   .text Загрузка
 
+div(v-else-if="checkState('fail')")
 
 .likes(
-  v-else-if="this.$store.state.countdown.appState === 'new' || this.$store.state.countdown.appState === 'editing'"
-  :class="{hide: this.$store.state.countdown.appState === 'editing'}"
+  v-else-if="checkState('new') || checkState('editing')"
+  :class="{hide: checkState('editing')}"
 )
   .wrapper
     span#hearContainer
@@ -45,8 +46,9 @@ export default {
   data() {
     return {
       likeAnimationWasInit: false,
-      likesCount: 0,
+      likesCount: this.$store.state.countdownData.likes,
       diffCount: 0,
+      pageID: this.$router.currentRoute.params.id,
     };
   },
 
@@ -157,11 +159,13 @@ export default {
 
     updateStoreAndDB() {
       let countLike; // init
+      const pathPageDB = `pages/${this.pageID}/likes`;
+
       // получаем лайки, прибавляем диф, и если фсё ок сбрасываем диф
-      this.$store.state.firebaseDB.ref('pages/0/likes').once('value')
+      this.$store.state.firebaseDB.ref(pathPageDB).once('value')
         .then((e) => {
           countLike = e.val() + this.diffCount;
-          this.$store.state.firebaseDB.ref('pages/0/likes').set(countLike)
+          this.$store.state.firebaseDB.ref(pathPageDB).set(countLike)
             .then(() => {
               this.$store.state.countdownData.likes = countLike;
               this.likesCount = countLike;
@@ -174,6 +178,10 @@ export default {
         .catch((error) => {
           console.error(error);
         });
+    },
+
+    checkState(string) {
+      return this.$store.state.countdown.appState === string;
     },
   },
 

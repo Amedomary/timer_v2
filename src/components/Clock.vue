@@ -1,5 +1,5 @@
 <template lang="pug">
-.clock(v-if="$store.state.countdown.appState === 'loading'")
+.clock(v-if="checkState('loading')")
     span.month Загрузка
     span.day
         span ?
@@ -10,20 +10,20 @@
     span.slash :
     span.minutes ??
 
-.clock(v-else-if="$store.state.countdown.appState === 'error'")
-    span.month e
+.clock(v-else-if="checkState('fail')")
+    span.month -
     span.day
-        span 3
-        i.title 2
-    span.hour e
+        span -
+        i.title
+    span.hour --
     span.slash :
-    span.minutes rr
+    span.minutes --
     span.slash :
-    span.minutes or
+    span.minutes --
 
 //- если загрузилось
 .clock(
-    :class="{ editable: this.$store.state.countdown.appState === 'editing' }"
+    :class="{ editable: checkState('editing') }"
     @click='editClock'
     v-else
 )
@@ -85,13 +85,13 @@ export default {
   },
   methods: {
     checkEditing() {
-      return this.$store.state.countdown.appState === 'editing';
+      return this.checkState('editing');
     },
     // запускаем таймер
     startTimer() {
       this.clockFunc();
       setInterval(() => {
-        if (this.$store.state.countdown.appState !== 'editing') {
+        if (!this.checkState('editing')) {
           this.clockFunc();
         }
       }, 1000);
@@ -195,8 +195,17 @@ export default {
         }, 100); // off состояние редактирования даты
       }
     },
+    checkState(string) {
+      return this.$store.state.countdown.appState === string;
+    },
   },
-  created() {
+  beforeMount() {
+    if (this.$store.state.countdownData.heading) {
+      this.finishDate = new Date(this.$store.state.countdownData.finishDate);
+      this.createNameOfFinishDate();
+      this.startTimer();
+    }
+
     this.$store.subscribe((mutation, state) => {
       if (state.countdownData.heading) {
         this.finishDate = new Date(state.countdownData.finishDate);

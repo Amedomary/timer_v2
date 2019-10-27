@@ -7,7 +7,7 @@
   img.background(
     src='', alt='', title='',
     :class="{fade: $store.state.countdown.appState === 'editing'}"
-    v-bind:src="imageSrcBackground"
+    v-bind:src="$store.state.countdownData.imageSrcBackground"
   )
   Grid
   Header
@@ -65,22 +65,12 @@ export default {
       imageSrcBackground: bg,
       styleApp: '',
       vueAppClass: '',
-      timerDate: {
-        pageTitle: 'headingMessage',
-        preHeading: 'preHeadingMessage',
-        heading: 'headingMessage',
-        description: 'descriptionTextMessage',
-        finishDate: 'finishDate.toString()',
-        imageSrcBackground: 'imageSrcBackground',
-        color: 'color',
-        buttonText: 'flowerButton.text',
-        buttonHref: 'flowerButton.link',
-      },
+      pageID: this.$router.currentRoute.params.id,
     };
   },
 
   created() {
-    this.$store.dispatch('getDataForId', 0); // получаем данные для таймера
+    this.$store.dispatch('getDataForId', this.pageID); // получаем данные для таймера
   },
 
   beforeRouteUpdate(to, from, next) {

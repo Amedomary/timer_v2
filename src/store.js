@@ -91,7 +91,11 @@ export default new Vuex.Store({
       // Запрашиваем если ничего нет
       database.ref(`pages/${id}`).once('value')
         .then((e) => {
-          commit('addCountdownData', e.val());
+          if (e.val()) {
+            commit('addCountdownData', e.val());
+          } else {
+            this.commit('changeAppState', 'fail');
+          }
         })
         .catch((error) => {
           console.error(error);

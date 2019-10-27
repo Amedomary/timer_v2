@@ -1,6 +1,6 @@
 <template lang="pug">
-.header(v-if="$store.state.countdown.appState !== 'loading'")
-    button.link-create(@click="createTimer", type="button", v-if="checkState('new')") Создать свой
+.header(v-if="!checkState('loading')")
+    button.link-create(@click="createTimer", type="button", v-if="checkState('new') || checkState('fail')") Создать свой
     button.link-create(@click="cancelTimer", type="button", v-if="checkState('editing')") Отмена
     button.link-create(@click="editTimer", type="button", v-if="checkState('modified')") Редактировать
 

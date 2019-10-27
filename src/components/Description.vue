@@ -1,11 +1,16 @@
 <template lang="pug">
-.description(v-if="!$store.state.countdownData.preHeading")
+.description(v-if="checkState('loading')")
     h1.heading Загрузка
     p.description-text Пожалуйста подождите
 
+.description(v-else-if="checkState('fail')")
+    h2.pre-heading Ошибка загрузки
+    h1.heading 404
+    p.description-text Проверьте адрес страницы
+
 .description(
-    :class='{ editable: this.$store.state.countdown.appState === "editing" }'
-    v-else="$store.state.countdownData"
+    :class="{ editable: checkState('editing')}"
+    v-else
 )
     h2.pre-heading(
         :class='vuePreHeadingClass'
@@ -139,6 +144,9 @@ export default {
     },
     editButton() {
       console.log('editButton');
+    },
+    checkState(string) {
+      return this.$store.state.countdown.appState === string;
     },
   },
 };
