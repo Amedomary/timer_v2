@@ -6,7 +6,7 @@
 }
 
 *:focus {
-  outline: var(--accent-light) auto 5px;
+  outline: var(--link-hover) auto 5px;
 }
 
 html {
@@ -52,8 +52,7 @@ button {
   font-size: inherit;
 
   &:hover {
-    color: var(--accent-light);
-
+    color: var(--link-hover);
   }
 }
 

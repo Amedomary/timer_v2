@@ -98,7 +98,7 @@ export default {
 @import './../assets/variables.scss';
 .banner {
     position: relative;
-    height: 600px;
+    height: 620px;
 }
 
 .image {
@@ -178,6 +178,7 @@ export default {
         text-align: right;
     }
 }
+
 .likes {
     margin: 0 0 .3rem;
     text-shadow: 2px 2px 6px black;
@@ -188,6 +189,40 @@ export default {
     font-size: 2rem;
     font-weight: 700;
     text-shadow: 2px 2px 6px black;
+}
+
+.button {
+    position: relative;
+    bottom: 0;
+    display: inline-block;
+    padding: 15px;
+    padding: 16px 22px;
+    font-size: 1rem;
+    font-size: 15px;
+    line-height: 1;
+    transition: .2s;
+    text-align: center;
+    text-decoration: none;
+    border-style: solid;
+    border-width: 1px;
+    border-color: var(--accent);
+    border-radius: 0;
+    background: none;
+    background-color: #00000020;
+
+    &:hover {
+        font-size: 15px;
+        border-color: var(--accent);
+        background-color: #000000dd;
+        color: var(--link-hover);
+    }
+
+    &:focus {
+        border-radius: 10px;
+        border-color: var(--accent);
+        color: var(--link-hover);
+        background-color: #0000009f;
+    }
 }
 
 </style>
