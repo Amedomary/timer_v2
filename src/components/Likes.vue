@@ -5,7 +5,7 @@
     span#hearContainer
       Icon.fas.fa-heart.--loading#bigHeart
     .count ---
-  .text Загрузка
+  .text Loading
 
 div(v-else-if="checkState('fail')")
 
@@ -147,8 +147,9 @@ export default {
         heartAnim(newH, newDs, newRingArr);
       }
 
-      document.getElementsByClassName('background')[0].addEventListener('click', clickForLike);
-      document.getElementsByClassName('likes')[0].addEventListener('click', clickForLike);
+      // like
+      document.getElementById('app').addEventListener('mousedown', clickForLike);
+      document.getElementById('app').addEventListener('touchstart', clickForLike);
     },
 
     clickLikeFromDom() {

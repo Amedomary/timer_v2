@@ -127,6 +127,7 @@ html, body, #app {
     object-fit: cover;
     transition: opacity .7s;
     user-select: none;
+    pointer-events: none;
 
     &.fade {
         opacity: .1;

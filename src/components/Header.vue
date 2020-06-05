@@ -1,16 +1,16 @@
 <template lang="pug">
 .header(v-if="!checkState('loading')")
-    button.link-create(@click="createTimer", type="button", v-if="checkState('new') || checkState('fail')") Создать свой
-    button.link-create(@click="cancelTimer", type="button", v-if="checkState('editing')") Отмена
-    button.link-create(@click="editTimer", type="button", v-if="checkState('modified')") Редактировать
+    button.link-create(@click="createTimer", type="button", v-if="checkState('new') || checkState('fail')") Create new
+    button.link-create(@click="cancelTimer", type="button", v-if="checkState('editing')") Cancel
+    button.link-create(@click="editTimer", type="button", v-if="checkState('modified')") Edit
 
-    button.link-create(@click="acceptCreateTimer", v-if="checkState('editing') && $store.state.countdown.unsavedChanged", type="button") Применить изменения
+    button.link-create(@click="acceptCreateTimer", v-if="checkState('editing') && $store.state.countdown.unsavedChanged", type="button") Accept
 
     button.link-create.link-create--release(
             @click="publishNewTimer", v-if="checkState('modified')", type="button"
-        ) Опубликовать
+        ) Publish
 
-    router-link.link-create.link-create--main(to="/") Main
+    router-link.link-create.link-create--main(to="/") Main page
 
 </template>
 

@@ -1,6 +1,6 @@
 <template lang="pug">
 .clock(v-if="checkState('loading')")
-    span.month Загрузка
+    span.month Loading
     span.day
         span ?
         i.title
@@ -109,7 +109,7 @@ export default {
         this.cl_hours = '00';
         this.cl_minutes = '00';
         this.cl_seconds = '00';
-        this.cl_days_title = 'деней';
+        this.cl_days_title = 'days';
       } else {
         let seconds = Math.floor((result / 1000) % 60);
         let minutes = Math.floor((result / 1000 / 60) % 60);
@@ -125,11 +125,11 @@ export default {
         this.cl_hours = hours;
         this.cl_minutes = minutes;
         this.cl_seconds = seconds;
-        this.cl_days_title = 'дней';
+        this.cl_days_title = 'days';
 
-        if (this.cl_days <= 1) {
-          this.cl_days_title = 'день';
-        }
+        // if (this.cl_days <= 1) {
+        //   this.cl_days_title = 'day';
+        // }
       }
     },
     createNameOfFinishDate() {

@@ -58,10 +58,16 @@ button {
 
 h1,h2,h3,h4,h5,h6 {
   font-family: var(--font-sans-serif);
+  font-weight: bold;
 }
 
 .conainer {
   max-width: 1440px;
   padding: 0 20px;
   margin: 0 auto;
+}
+
+input {
+  color: inherit;
+  font-family: var(--font-sans-serif);
 }
